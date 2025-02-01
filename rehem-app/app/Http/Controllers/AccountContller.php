@@ -8,6 +8,7 @@ class AccountContller extends Controller
 {
     public function top()
     {
+        // やあ
         return view("main");
     }
 }
