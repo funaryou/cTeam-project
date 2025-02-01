@@ -10,3 +10,9 @@ RUN apt-get update && \
     apt-get -y install git unzip libzip-dev default-mysql-client && \
     docker-php-ext-install zip pdo pdo_mysql && \
     docker-php-ext-enable pdo_mysql
+
+EXPOSE 8000
+WORKDIR /back/rehem-app
+
+
+CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]
