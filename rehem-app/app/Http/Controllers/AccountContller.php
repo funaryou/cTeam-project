@@ -15,8 +15,10 @@ class AccountContller extends Controller
             return redirect()->route("post");
         }
 
-        // りょうまのとこ
+        // りょうまのとこですよ
         function post($account_db){
+
+            
 
         }
         
