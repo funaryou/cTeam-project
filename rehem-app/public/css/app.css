@@ -1,0 +1,330 @@
+@charset "utf-8";
+
+:root{
+    /* color */
+    --mainColor: #59C3DC;
+    --subColor: #134074;
+    --accentColor: #EFA00B;
+    --backgroundColor: #FCF7F8;
+    --dimColor: #DAD2D8;
+    /* variable */
+    --sidebarWidth: 72px;
+    --mainBorderRadius: 18px;
+    --mainShadow: 0 4px 24px #0000004e;
+    --fullBorderRadius: 1000px;
+    --borderStyle: solid 1px var(--dimColor);
+}
+
+body{
+    background-color: var(--backgroundColor);
+    font-family: "Noto Sans JP", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: var(--subColor);
+}
+
+header.sidebar{
+    width: var(--sidebarWidth);
+    background-color: var(--mainColor);
+    position: fixed;
+    padding: 72px 0;
+    border-bottom-right-radius: 48px;
+    display: flex;
+    justify-content: center;
+
+    & .nav{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+
+        & .navItem{
+            display: block;
+            width: 30px;
+            height: auto;
+            aspect-ratio: 1/1;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 78%;
+
+            & a{
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            &.home{
+                background-image: url(../img/homeIcon.svg);
+            }
+
+            &.addRecord{
+                background-image: url(../img/addRecordIcon.svg);
+            }
+
+            &.profile{
+                background-image: url(../img/profileIcon.svg);
+            }
+
+            &.post{
+                background-image: url(../img/postIcon.svg);
+            }
+        }
+
+        & .divider{
+            display: block;
+            width: 36px;
+            height: 0;
+            border: solid 1px var(--backgroundColor);
+        }
+    }
+}
+
+main{
+    width: calc(100vw - var(--sidebarWidth));
+    margin-left: var(--sidebarWidth);
+    padding: 72px;
+    display: flex;
+    gap: 48px;
+}
+
+section.record{
+    width: 70%;
+    height: auto;
+    padding: 30px;
+    background-color: var(--backgroundColor);
+    border: solid 1px var(--dimColor);
+    border-radius: var(--mainBorderRadius);
+    box-shadow: var(--mainShadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    & .graph{
+        width: 100%;
+        height: 300px;
+        border: solid 1px var(--dimColor);
+        border-radius: calc(var(--mainBorderRadius) / 2);
+    }
+
+    & .indicator{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        & .wrapper{
+            display: flex;
+            gap: 72px;
+            margin: 24px 0;
+            align-items: center;
+
+            & .title{
+                color: var(--subColor);
+                font-weight: bold;
+                font-size: 24px;
+            }
+
+            & .count{
+                color: var(--accentColor);
+                font-weight: bold;
+                font-size: 48px;
+            }
+
+            & .oxygenPacentage{
+
+                & p{
+                    font-weight: bold;
+                    font-size: 30px;
+                    margin: 12px 0;
+
+                    &.aerobic{
+                        color: var(--mainColor);
+                    }
+
+                    &.anoxic{
+                        color: var(--subColor);
+                    }
+                }
+            }
+
+            & .recordButton{
+                margin-left: auto;
+                width: fit-content;
+                height: fit-content;
+                padding: 12px 48px;
+                background-color: var(--mainColor);
+                border-radius: var(--fullBorderRadius);
+                color: var(--backgroundColor);
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+section.post{
+    display: block;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    & .userIcon{
+        height: 42px;
+        width: auto;
+        aspect-ratio: 1/1;
+        background-color: var(--dimColor);
+        border-radius: var(--fullBorderRadius);
+    }
+
+    & .postForm, .postFeed{
+        display: block;
+        width: 100%;
+        padding: 30px;
+        background-color: var(--backgroundColor);
+        border: solid 1px var(--dimColor);
+        border-radius: var(--mainBorderRadius);
+        box-shadow: var(--mainShadow);
+    }
+
+    & .postForm{
+
+        & .postFormItem{
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+
+            & .wrapper{
+                display: flex;
+                gap: 18px;
+                width: 100%;
+                height: fit-content;
+            }
+
+            & .postInput{
+                padding: 0 24px;
+                width: 100%;
+                height: 42px;
+                border: var(--borderStyle);
+                border-radius: var(--fullBorderRadius);
+
+                &::placeholder{
+                    opacity: 0.5;
+                }
+            }
+
+            & .postButton{
+                margin-left: auto;
+                width: fit-content;
+                height: 42px;
+                padding: 0 24px;
+                background-color: var(--mainColor);
+                border-radius: var(--fullBorderRadius);
+                color: var(--backgroundColor);
+            }
+        }
+    }
+
+    & .postFeed{
+        position: relative;
+        overflow: hidden;
+
+        &::after{
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(transparent,var(--backgroundColor));
+        }
+
+        & ul{
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            height: 360px;
+            overflow: scroll;
+            padding-bottom: 180px;
+            
+            & .postCard{
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+
+                & .wrapper{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    height: fit-content;
+
+                    .likeIndicator{
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+
+                        & .likeCount{
+                            opacity: 0.8;
+                        }
+
+                        & .likeButton{
+                            opacity: 0.5;
+                            display: block;
+                            height: 42px;
+                            width: auto;
+                            aspect-ratio: 1/1;
+                            background-color: var(--dimColor);
+                            background-image: url(../img/likeIcon.svg);
+                            background-size: 50%;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            border-radius: var(--fullBorderRadius);
+                        }
+                    }                    
+                }
+
+                & .postContent{
+                    opacity: 0.8;
+                }
+
+                & .divider{
+                    margin-top: 12px;
+                    display: block;
+                    width: 100%;
+                    height: 0;
+                    border: solid 1px var(--dimColor);
+                }
+
+                &:last-child .divider{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    & .switchFollow{
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: var(--backgroundColor);
+        border: solid 1px var(--dimColor);
+        border-radius: var(--mainBorderRadius);
+        box-shadow: var(--mainShadow);
+        display: flex;
+        gap: 12px;
+
+        & button{
+            background-color: none;
+            width: 50%;
+            height: 42px;
+            border-radius: calc(var(--mainBorderRadius) / 2);
+            text-align: center;
+            color: var(--subColor);
+            cursor: pointer;
+        }
+
+        & button.active{
+            background-color: var(--mainColor);
+            color: var(--backgroundColor);
+        }
+    }
+}
