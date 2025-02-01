@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    // use HasFactory;
-    // protected $fillable = ["id","content","author","liked_by"];
+    use HasFactory;
+    protected $fillable = ["id","content","author","liked_by"];
 }
