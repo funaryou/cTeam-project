@@ -9,4 +9,10 @@ class Account extends Model
     protected $fillable = ["user_name", "profile_pic", "weekly_total", "profile_word", "birthday",
                             "stature", "weight", "follow", "follower", "target", "lifestyle",
                             "daily_aerobic", "daily_anoxic", "exercise_time"]
+    
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author_id');
+    }
 }
+
