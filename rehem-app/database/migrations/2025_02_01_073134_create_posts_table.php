@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
+            $table->id("id");
+            $table->text("content");
             $table->timestamps();
         });
     }
-
+    // ["id","content","author","liked_by"];
     /**
      * Reverse the migrations.
      */
