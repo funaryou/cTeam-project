@@ -1,0 +1,7 @@
+services:
+  app:
+    build: ./
+    volumes:
+      - .:/back
+    ports:
+     - 8077:8000
