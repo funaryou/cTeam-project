@@ -8,16 +8,20 @@ use Illuminate\Database\Eloquent\Model\AccountContller;
 
 class AccountContller extends Controller
 {
-    public function top()
-    {
-        public function interface(){
+    class mainFanction{
+
+        $account_db = function interface(){
             $account = AccountContller::all();
             return redirect()->route("post");
         }
 
-        // りょうまのとこ
-        public function post(){
+        // りょうまのとこですよ
+        function post($account_db){
+
+            
 
         }
+        
     }
+    
 }
