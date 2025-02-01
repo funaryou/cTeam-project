@@ -5,3 +5,16 @@ services:
       - .:/back
     ports:
      - 8077:8000
+
+  db:
+    image: mysql:8.3
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - 3377:3306
+    environment:
+      MYSQL_DATABASE: rehem_sql
+      MYSQL_ROOT_PASSWORD: rehem_sql_8077
+
+volumes:
+  db:
