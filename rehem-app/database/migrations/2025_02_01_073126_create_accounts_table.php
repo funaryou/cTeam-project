@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string("user_name");
-            $table->img("profile_pic");
-            $table->int("daily_aerobic");
-            $table->int("daily_anoxic");
-            $table->int("weekly_total");
+            $table->text("profile_pic");
+            $table->integer("daily_aerobic");
+            $table->integer("daily_anoxic");
+            $table->integer("weekly_total");
             $table->text("profile_word");
-            $table->int("birthday");
-            $table->int("stature");
-            $table->int("weight");
-            $table->int("follow");
-            $table->int("follower");
+            $table->integer("birthday");
+            $table->integer("stature");
+            $table->integer("weight");
+            $table->integer("follow");
+            $table->integer("follower");
             $table->string("target");
             $table->text("lifestyle");
-            $table->int("exercise_time");
+            $table->integer("exercise_time");
             $table->timestamps();
         });
     }
