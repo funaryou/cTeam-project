@@ -1,14 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccountContller;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Ruote::prefix("rehem")->group(, function(){
-    Ruote::get("/main",[AccountController::class, "top"])->nane("top");
-    Ruote::get("/profile", [AccountController::class, "profile"])->name("profile");
-    Ruote::get("/record", [AccountController::class, "record"])->name("record");
+Route::prefix("/rehem")->group(function(){
+    Route::get("/main",[AccountContller::class, "top"])->name("top");
+    Route::get("/profile", [AccountContller::class, "profile"])->name("profile");
+    Route::get("/record", [AccountContller::class, "record"])->name("record");
 });
