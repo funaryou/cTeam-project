@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 
 Route::prefix("/rehem")->group(function(){
-    Route::get("/main",[AccountContller::class, "__construct"])->name("__construct");
+    Route::get("/main",[AccountContller::class, "top"])->name("top");
     Route::get("/profile", [AccountContller::class, "profile"])->name("profile");
     Route::get("/record", [AccountContller::class, "record"])->name("record");
 });

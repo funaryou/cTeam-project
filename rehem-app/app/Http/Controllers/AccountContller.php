@@ -8,25 +8,25 @@ use App\Models\Account;
 
 class AccountContller extends Controller
 {
-    // public function top()
+    public function top()
+    {
+        return view("main");
+    }
+
+    // public function __construct()
     // {
-    //     return view("main");
+    //     $this->account_db = function (){
+    //         $accounts = Account::all();
+    //         return redirect()->route("post");
+    //     };
     // }
 
-    public function __construct()
-    {
-        $this->account_db = function (){
-            $accounts = Account::all();
-            return redirect()->route("post");
-        };
-    }
+    // public function post()
+    // {
+    //     $account = ($this->account_db)();
 
-    public function post()
-    {
-        $account = ($this->account_db)();
-
-        return redirect()->route("views.main");
-    }
+    //     return redirect()->route("views.main");
+    // }
 
 
 
