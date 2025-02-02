@@ -38,9 +38,16 @@ class AccountContller extends Controller
         return view("profile");
     }
 
+    //記録用
+
     public function record()
     {
         return view("record");
+    }
+
+    public function day_record()
+    {
+        return view("main", compact("account"));
     }
 
 }

@@ -4,6 +4,8 @@
     <section class="recordForm">
         <div class="date">2xxx年xxx月xxx日</div>
         <div class="recordFormItem">
+            <form action="{{route("day_record")}}" method="POST">
+                @csrf
                 <article class="oxyCol column">
                     <p>内容</p>
                     <div class="divider"></div>
@@ -27,6 +29,7 @@
                     <div class="divider"></div>
                 </article>
                 <button type="submit" class="commonXLButton">記録する</button>
+            </form>
         </div>
     </section>
 @endsection
