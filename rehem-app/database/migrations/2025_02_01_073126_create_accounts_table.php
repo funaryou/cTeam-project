@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string("user_name");
+            $table->string("user_name")->unique();
+            $table->string("email")->unique();
+            $table->string("password");
             $table->text("profile_pic");
             $table->integer("daily_aerobic");
             $table->integer("daily_anoxic");
             $table->integer("weekly_total");
             $table->text("profile_word");
-            $table->integer("birthday");
+            $table->integer("birthday_year");
+            $table->integer("birthday_day");
+            $table->integer("birthday_month");
             $table->integer("stature");
             $table->integer("weight");
             $table->integer("follow");

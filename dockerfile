@@ -1,5 +1,6 @@
 FROM php:8.3-fpm
-WORKDIR /back
+
+WORKDIR /back/rehem-app
 
 COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
@@ -11,8 +12,8 @@ RUN apt-get update && \
     docker-php-ext-install zip pdo pdo_mysql && \
     docker-php-ext-enable pdo_mysql
 
-EXPOSE 8000
-WORKDIR /back/rehem-app
+COPY . .
 
+EXPOSE 8000
 
 CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]
