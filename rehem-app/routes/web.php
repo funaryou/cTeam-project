@@ -14,6 +14,7 @@ Route::prefix("/rehem")->group(function(){
     Route::get("/main", [AccountController::class, "top"])->name("top")->middleware('auth');
     Route::get("/profile", [AccountController::class, "profile"])->name("profile")->middleware('auth');
     Route::get("/record", [AccountController::class, "record"])->name("record")->middleware('auth');
+    Route::post("/", [AccountContller::class, "day_record"])->name("day_record")->middleware('auth');
 });
 
 
@@ -29,4 +30,9 @@ Route::prefix("/account")->group(function(){
 Route::prefix("/test")->group(function(){
     Route::get('/post', [PostController::class, 'test'])->name('test')->middleware('auth');
     Route::post('/post', [PostController::class, 'store'])->name('store')->middleware('auth'); 
+});
+    Route::get("/main",[AccountContller::class, "top"])->name("top");
+    Route::get("/profile", [AccountContller::class, "profile"])->name("profile");
+    Route::get("/record", [AccountContller::class, "record"])->name("record");
+
 });
