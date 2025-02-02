@@ -6,12 +6,31 @@ use App\Models\Account;
 use Illuminate\Support\Facades\Hash;
 
 
-class AccountController extends Controller
+class AccountContller extends Controller
 {
     public function top()
     {
         return view("main");
     }
+
+    // public function __construct()
+    // {
+    //     $this->account_db = function (){
+    //         $accounts = Account::all();
+    //         return redirect()->route("post");
+    //     };
+    // }
+
+    // public function post()
+    // {
+    //     $account = ($this->account_db)();
+
+    //     return redirect()->route("views.main");
+    // }
+
+
+
+
 
     
     public function profile()
