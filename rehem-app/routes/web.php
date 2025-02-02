@@ -31,6 +31,3 @@ Route::prefix("/test")->group(function(){
     Route::get('/post', [PostController::class, 'test'])->name('test')->middleware('auth');
     Route::post('/post', [PostController::class, 'store'])->name('store')->middleware('auth'); 
 });
-    Route::get("/main",[AccountContller::class, "top"])->name("top");
-    Route::get("/profile", [AccountContller::class, "profile"])->name("profile");
-    Route::get("/record", [AccountContller::class, "record"])->name("record");
