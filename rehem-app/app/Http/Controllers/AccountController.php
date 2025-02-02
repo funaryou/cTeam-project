@@ -6,7 +6,7 @@ use App\Models\Account;
 use Illuminate\Support\Facades\Hash;
 
 
-class AccountContller extends Controller
+class AccountController extends Controller
 {
     public function top()
     {
