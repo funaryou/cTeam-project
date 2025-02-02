@@ -7,6 +7,8 @@
     --accentColor: #EFA00B;
     --backgroundColor: #FCF7F8;
     --dimColor: #DAD2D8;
+    --sliderHoverColor: #C8BCC5;
+    --sliderActiveColor: #AAE1EE;
     /* variable */
     --sidebarWidth: 72px;
     --mainBorderRadius: 18px;
@@ -71,12 +73,74 @@ header.sidebar{
         }
 
         & .divider{
-            display: block;
-            width: 36px;
-            height: 0;
-            border: solid 1px var(--backgroundColor);
+            display: block !important;
+            width: 36px !important;
+            height: 0 !important;
+            border-top: solid 1px var(--backgroundColor) !important;
         }
     }
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    background: var(--dimColor);
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s ease;
+    margin: 24px 0;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        background: var(--subColor);
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        background: var(--subColor);
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    &:hover {
+        background: var(--sliderHoverColor);
+    }
+
+    &:active {
+        background: var(--sliderActiveColor);
+    }
+}
+
+.commonButton{
+    margin-left: auto;
+    width: fit-content;
+    height: 42px;
+    padding: 0 24px;
+    background-color: var(--mainColor);
+    border-radius: var(--fullBorderRadius);
+    color: var(--backgroundColor);
+    cursor: pointer;
+}
+
+.commonXLButton{
+    margin-left: auto;
+    width: fit-content;
+    height: fit-content;
+    padding: 12px 48px;
+    background-color: var(--mainColor);
+    border-radius: var(--fullBorderRadius);
+    color: var(--backgroundColor);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 main{
@@ -85,6 +149,13 @@ main{
     padding: 72px;
     display: flex;
     gap: 48px;
+}
+
+.divider{
+    display: block;
+    width: 100%;
+    height: 0;
+    border-top: solid 1px var(--dimColor);
 }
 
 section.record{
@@ -145,17 +216,6 @@ section.record{
                     }
                 }
             }
-
-            & .recordButton{
-                margin-left: auto;
-                width: fit-content;
-                height: fit-content;
-                padding: 12px 48px;
-                background-color: var(--mainColor);
-                border-radius: var(--fullBorderRadius);
-                color: var(--backgroundColor);
-                font-size: 24px;
-            }
         }
     }
 }
@@ -209,16 +269,6 @@ section.post{
                 &::placeholder{
                     opacity: 0.5;
                 }
-            }
-
-            & .postButton{
-                margin-left: auto;
-                width: fit-content;
-                height: 42px;
-                padding: 0 24px;
-                background-color: var(--mainColor);
-                border-radius: var(--fullBorderRadius);
-                color: var(--backgroundColor);
             }
         }
     }
@@ -288,10 +338,6 @@ section.post{
 
                 & .divider{
                     margin-top: 12px;
-                    display: block;
-                    width: 100%;
-                    height: 0;
-                    border: solid 1px var(--dimColor);
                 }
 
                 &:last-child .divider{
@@ -320,11 +366,107 @@ section.post{
             text-align: center;
             color: var(--subColor);
             cursor: pointer;
+            opacity: 0.5;
+            font-weight: bold;
+            transition: all .25s;
+
+            &:hover{
+                background-color: var(--dimColor);
+                opacity: 1;
+            }
+
+            &.active{
+                background-color: var(--mainColor);
+                color: var(--backgroundColor);
+                opacity: 1;
+            }
+        }
+    }
+}
+
+section.recordForm{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 50%;
+    margin: 0 auto;
+
+    & .date{
+        padding: 30px;
+        background-color: var(--backgroundColor);
+        border: solid 1px var(--dimColor);
+        border-radius: var(--mainBorderRadius);
+        box-shadow: var(--mainShadow);
+    }
+
+    & .recordFormItem{
+        padding: 30px;
+        background-color: var(--backgroundColor);
+        border: solid 1px var(--dimColor);
+        border-radius: var(--mainBorderRadius);
+        box-shadow: var(--mainShadow);
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        & .column{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
-        & button.active{
-            background-color: var(--mainColor);
-            color: var(--backgroundColor);
+        & .buttonWrapper{
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+        }
+
+        & .switchOxyButton{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: none;
+            width: 50%;
+            height: 60px;
+            border-radius: calc(var(--mainBorderRadius) / 2);
+            text-align: center;
+            color: var(--subColor);
+            cursor: pointer;
+            opacity: 0.5;
+            font-weight: bold;
+            transition: all .25s;
+
+            &:hover{
+                background-color: var(--dimColor);
+                opacity: 1;
+            }
+
+            &.active{
+                background-color: var(--mainColor);
+                color: var(--backgroundColor);
+                opacity: 1;
+            }
+        }
+
+        & .timeCol{
+
+            & .sliderValue{
+                margin-left: auto;
+                font-size: 30px;
+                font-weight: bold;
+                color: var(--accentColor);
+
+                & span:not(.highlight){
+                    opacity: 0.66;
+                }
+
+                & span.highlight{
+                    font-size: 60px;
+                    margin: 0 12px;
+                    opacity: 1;
+                }
+            }
         }
     }
 }
