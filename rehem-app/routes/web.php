@@ -11,7 +11,7 @@ Route::get('/', function () {
 
 
 Route::prefix("/rehem")->group(function(){
-    Route::get("/main", [AccountController::class, "top"])->name("top")->middleware('auth');
+    Route::get("/main", [AccountController::class, "top"])->name("top");
     Route::get("/profile", [AccountController::class, "profile"])->name("profile")->middleware('auth');
     Route::get("/record", [AccountController::class, "record"])->name("record")->middleware('auth');
     Route::post("/", [AccountController::class, "day_record"])->name("day_record")->middleware('auth');
