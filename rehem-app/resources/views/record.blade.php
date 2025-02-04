@@ -4,7 +4,7 @@
     <section class="recordForm">
         <div class="date">2xxx年xxx月xxx日</div>
         <div class="recordFormItem">
-            <form action="{{route("day_record")}}" method="POST">
+            <form action="{{route("day_record")}}" method="POST" class="column">
                 @csrf
                 <article class="oxyCol column">
                     <p>内容</p>
@@ -12,10 +12,12 @@
                     <div class="buttonWrapper">
                         <label class="switchOxyButton active">
                             <input type="radio" name="oxygen" value="aerobic">
+                            <div class="aerobicIcon icon"></div>
                             <p>有酸素</p>
                         </label>
                         <label class="switchOxyButton">
                             <input type="radio" name="oxygen" value="aerobic">
+                            <div class="anoxicIcon icon"></div>
                             <p>無酸素</p>
                         </label>
                     </div>
