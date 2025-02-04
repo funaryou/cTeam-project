@@ -7,7 +7,7 @@
 </head>
 <body>
     login 
-    <form method="POST" action="{{ route('login.submit') }}">
+    <form method="POST" action="{{ route('login') }}">
         @csrf
         mailaddress:
         <input type="email" name="email" required>

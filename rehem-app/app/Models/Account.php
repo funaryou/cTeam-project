@@ -47,6 +47,11 @@ class Account extends Model implements Authenticatable
         "target" => 0,
         "lifestyle" => "",
     ];
+    
+    public function sessions()
+    {
+        return $this->hasMany(Session::class, 'user_id', 'id'); // 'user_id'はセッションテーブルの外部キー
+    }
 
     public function posts()
     {
