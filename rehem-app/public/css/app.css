@@ -16,6 +16,11 @@
     --fullBorderRadius: 1000px;
     --borderStyle: solid 1px var(--dimColor);
     --boldFont: 600;
+
+    /* svg icon color filter */
+    --color-convert-backgroundColor: invert(100%) sepia(20%) saturate(5627%) hue-rotate(184deg) brightness(110%) contrast(98%);
+    --color-convert-mainColor: invert(66%) sepia(24%) saturate(767%) hue-rotate(144deg) brightness(97%) contrast(103%);
+    --color-convert-subColor: invert(17%) sepia(96%) saturate(1024%) hue-rotate(189deg) brightness(94%) contrast(95%);
 }
 
 body{

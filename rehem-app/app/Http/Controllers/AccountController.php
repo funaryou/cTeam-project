@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Account;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Activity;
 
@@ -12,6 +13,8 @@ class AccountController extends Controller
 {
     public function top()
     {
+        $account = Auth::user();
+
 
         $sevenDaysAgo = Carbon::now()->subDays(6)->startOfDay();
         $today = Carbon::now()->endOfDay();
@@ -23,9 +26,9 @@ class AccountController extends Controller
             ->get();
 
         // `main.blade.php` に `$activityCounts` を渡す
-        return view('main', compact('activityCounts'));
+        // return view('main', );
 
-        return view("main");
+        return view("main",compact('activityCounts'), compact('account'));
     }
 
     // public function __construct()
