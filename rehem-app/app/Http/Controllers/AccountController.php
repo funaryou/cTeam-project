@@ -38,6 +38,11 @@ class AccountController extends Controller
         return view("profile");
     }
 
+    public function prof_update()
+    {
+        return view("prof_update");
+    }
+
     public function record()
     {
         return view("record");
