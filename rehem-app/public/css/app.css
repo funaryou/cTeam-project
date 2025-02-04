@@ -548,12 +548,18 @@ section.recordForm{
     }
 }
 
-section.userProfile{
+.userProfile{
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 48px;
     align-items: center;
+
+    & input, textarea{
+        border: solid 1px var(--dimColor);
+        border-radius: 6px;
+
+    }
     
     & .upperSection{
         padding: 30px;
@@ -565,14 +571,22 @@ section.userProfile{
         gap: 48px;
         width: 60%;
 
-        & .commonButton.edit{
-            background-color: var(--accentColor);
+        & .commonButton{
+            &.edit{
+                background-color: var(--accentColor);
+                color: var(--backgroundColor);
+            }
+
+            &.cancel{
+                background-color: var(--dimColor);
+                color: var(--subColor);
+            }
         }
 
         & .uesrIcon{
             display: block;
             width: 120px;
-            height: auto;
+            height: 120px;
             aspect-ratio: 1/1;
             background-color: var(--dimColor);
             border-radius: var(--fullBorderRadius);
@@ -594,6 +608,16 @@ section.userProfile{
             & .message{
                 font-size: 18px;
             }
+        }
+
+        & .buttonWrapper{
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: end;
+            gap: 6px;
+            height: 100%;
+            width: 100%;
         }
     }
 

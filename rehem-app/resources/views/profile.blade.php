@@ -5,8 +5,8 @@
         <article class="upperSection">
             <div class="uesrIcon"></div>
             <div class="wrapper">
-                <p class="name">なかやまきんに君</p>
-                <p class="message">筋トレ大好き</p>
+                <p class="name">{{ $account->user_name}}</p>
+                <p class="message">{{ $account->profile_word}}</p>
             </div>
             <a href="{{route("edit", ["id" => $account->id])}}" class="commonButton edit">プロフィールを編集</a>
         </article>
@@ -16,7 +16,7 @@
                 <h2 class="title">プロフィール</h2>
                 <table>
                     <tr>
-                        <th>生年月日</th><td>2xxx年x月x日</td>
+                        <th>生年月日</th><td></td>
                     </tr>
                     <tr>
                         <th>性別</th><td>男女</td>
