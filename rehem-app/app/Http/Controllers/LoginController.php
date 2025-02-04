@@ -32,8 +32,8 @@ class LoginController extends Controller
             if (Hash::check($request->password, $account->password)) {
                 Auth::login($account); 
                 \Log::info('User logged in: ' . $account->email);
-                $account->sessions()->regenerate();
-                return redirect()->intended('rehem.main'); // ログイン成功時のリダイレクト
+                session()->regenerate();
+                return redirect()->intended('rehem/main'); // ログイン成功時のリダイレクト
             } else {
                 \Log::warning('Password mismatch for: ' . $request->email);
                 \Log::info('Input password: ' . $request->password);
