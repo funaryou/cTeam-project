@@ -90,21 +90,28 @@ class AccountController extends Controller
     public function day_record(Request $request) {
 
         $user = Auth::user();
+        $account = $user;
 
         if ($request->input('oxy') == "aerobic" ) {
             Activity::create([
                 "daily_aerobic" => $request-> input("value"),
                 "daily_anoxic" => 0,
                 "author_id" => $user->id,
+                "record_at" => now()->toDateString(),
+                "created_at" => now(),
+                "updated_at" => now(), // ここでタイムスタンプを指定
             ]);
         } else {
             Activity::create([
                 "daily_aerobic" => 0,
                 "daily_anoxic" => $request-> input("value"),
                 "author_id" => $user->id,
+                "record_at" => now()->toDateString(),
+                "created_at" => now(),
+                "updated_at" => now(), // ここでタイムスタンプを指定
             ]);
         }
-        return view("rehem.main");
+        return redirect('/rehem/main');
 
     }
 

@@ -13,6 +13,8 @@ class Activity extends Model
         'author_id'
     ];
 
+    public $timestamps = false;
+
     public function author()
     {
         return $this->belongsTo(Account::class, 'author_id');
