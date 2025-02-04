@@ -9,7 +9,7 @@
             <div class="wrapper">
                 <div class="todayTotal">
                     <p class="title">今日</p>
-                    <p class="count">20時間</p>
+                    <p class="count">{{$activityCountsToday->total_aerobic}}</p>
                 </div>
                 <div class="weeklyTotal">
                     <p class="title">今週</p>
@@ -120,40 +120,96 @@
     </section>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const labels = @json($activityCounts->pluck('date'));
-            const aerobicData = @json($activityCounts->pluck('total_aerobic'));
-            const anoxicData = @json($activityCounts->pluck('total_anoxic'));
+        const data = {
+            labels: [
+                @foreach($activityCounts as $activity)
+                    "{{ $activity->date }}", 
+                @endforeach
+            ], // 日付のラベル
 
-            const ctx = document.getElementById('activityChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: '有酸素運動',
-                            data: aerobicData,
-                            borderColor: 'blue',
-                            fill: false
-                        },
-                        {
-                            label: '無酸素運動',
-                            data: anoxicData,
-                            borderColor: 'red',
-                            fill: false
-                        }
-                    ]
+            datasets: [
+                {
+                    label: "有酸素",
+                    data: [
+                        @foreach($activityCounts as $activity)
+                            {{ $activity->total_aerobic }},
+                        @endforeach
+                    ],  // 有酸素データ
+                    backgroundColor: "#59C3DC", // 有酸素の棒色
                 },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
+                {
+                    label: "無酸素",
+                    data: [
+                        @foreach($activityCounts as $activity)
+                            {{ $activity->total_anoxic }},
+                        @endforeach
+                    ],  // 無酸素データ
+                    backgroundColor: "#134074", // 無酸素の棒色
                 }
-            });
+            ],
+        };
+
+        // グラフの設定
+        const options = {
+            // responsive: false,
+            title: {
+                display: true,
+                text: "有酸素と無酸素の積み上げ棒グラフ",
+                fontSize: 20,
+            },
+            legend: {
+                display: true,
+                position: "top",
+            },
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 20,
+                    top: 10,
+                    bottom: 10,
+                },
+            },
+            scales: {
+                y: {
+                    stacked: true,
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 20,
+                        max: 250,
+                        min: 0,
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: "時間 (分)",
+                        fontSize: 15,
+                    },
+                },
+                x: {
+                    stacked: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: "日付",
+                        fontSize: 15,
+                    },
+                    gridLines: {
+                        display: false,
+                    },
+                }
+            },
+            elements: {
+                bar: {
+                    borderRadius: 10,  // ここでバーの角を丸くする
+                }
+            },
+            maintainAspectRatio: false,
+        };
+
+        // canvasにグラフを描画
+        const ctx = document.querySelector("#activityChart");
+        const activityChart = new Chart(ctx, {
+            type: "bar",
+            data: data,
+            options: options,
         });
     </script>
 @endsection
