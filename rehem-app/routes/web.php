@@ -17,6 +17,9 @@ Route::prefix("/rehem")->group(function(){
     Route::get("/{id}/prof_update", [AccountController::class, "prof_update"])->name("prof_update")->middleware('auth');
     Route::get("/{id}/edit", [AccountController::class, "edit"])->name("edit")->middleware('auth');
     Route::get("/record", [AccountController::class, "record"])->name("record")->middleware('auth');
+    Route::post('/post/store', [PostController::class, 'post_store'])->name('rehem.post_store')->middleware('auth');
+    Route::get("/record", [AccountController::class, "record"])->name("record")->middleware('auth');
+    Route::post("/day_record", [AccountController::class, "day_record"])->name("day_record")->middleware('auth');
     Route::post('/recode', [RecodeGetController::class, 'recode_get'])->name('recode_get')->middleware('auth');
     Route::post("/", [AccountController::class, "day_record"])->name("day_record")->middleware('auth');
 });
@@ -34,10 +37,10 @@ Route::prefix("/account")->group(function(){
 
 
 
-Route::prefix("/test")->group(function(){
-    Route::get('/post', [PostController::class, 'test'])->name('test')->middleware('auth');
-    Route::post('/post', [PostController::class, 'store'])->name('store')->middleware('auth'); 
-});
+// Route::prefix("/test")->group(function(){
+//     Route::get('/post', [PostController::class, 'test'])->name('test')->middleware('auth');
+//     Route::post('/post', [PostController::class, 'store'])->name('store')->middleware('auth'); 
+// });
 
 // aaa
 
