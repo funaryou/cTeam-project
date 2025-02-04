@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('author_id');
             $table->integer('daily_aerobic');
             $table->integer('dairy_anoxic');
-            $table->timestamps("record_at");
+            $table->date("record_at");
             // 外部キー制約
             $table->foreign('author_id')->references('id')->on('accounts')->onDelete('cascade');
         });

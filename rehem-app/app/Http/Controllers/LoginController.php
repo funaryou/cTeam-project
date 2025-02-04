@@ -30,8 +30,8 @@ class LoginController extends Controller
         $account = Account::where('email', $request->email)->first();
         if ($account) {
             if (Hash::check($request->password, $account->password)) {
-                Auth::login($account); 
                 \Log::info('User logged in: ' . $account->email);
+                Auth::login($account); 
                 session()->regenerate();
                 return redirect()->intended('rehem/main'); // ログイン成功時のリダイレクト
             } else {
