@@ -15,19 +15,33 @@ class AccountController extends Controller
     {
         $account = Auth::user();
 
+    $sevenDaysAgo = Carbon::now()->subDays(6)->startOfDay();
+    $today = Carbon::now()->endOfDay();
 
-        $sevenDaysAgo = Carbon::now()->subDays(6)->startOfDay();
-        $today = Carbon::now()->endOfDay();
+    // ① DBからデータ取得（日付ごとに集計）
+    $activityData = Activity::selectRaw('DATE(record_at) as date, SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
+        ->whereBetween('record_at', [$sevenDaysAgo, $today])
+        ->groupBy('date')
+        ->orderBy('date', 'asc')
+        ->get()
+        ->keyBy('date'); // 日付をキーにする
 
-        $activityCounts = Activity::selectRaw('DATE(record_at) as date, SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
-            ->whereBetween('record_at', [$sevenDaysAgo, $today])
-            ->groupBy('date')
-            ->orderBy('date', 'asc')
-            ->get();
+    // ② 7日分の日付を作成し、データがない日は 0 で補完
+    $dates = collect();
+    for ($i = 6; $i >= 0; $i--) {
+        $date = Carbon::now()->subDays($i)->toDateString();
+        $dates[$date] = [
+            'date' => $date,
+            'total_aerobic' => $activityData[$date]->total_aerobic ?? 0,
+            'total_anoxic' => $activityData[$date]->total_anoxic ?? 0,
+        ];
+    }
 
-        // `main.blade.php` に `$activityCounts` を渡す
-        // return view('main', );
-        $activityCountsToday = Activity::selectRaw('SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
+    // ③ Laravel に渡すデータを修正
+    $activityCounts = $dates->values(); // コレクションを配列に変換
+
+    // 今日のデータ
+    $activityCountsToday = Activity::selectRaw('SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
         ->whereDate('record_at', Carbon::today())
         ->first();
 

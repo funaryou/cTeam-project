@@ -123,7 +123,7 @@
         const data = {
             labels: [
                 @foreach($activityCounts as $activity)
-                    "{{ $activity->date }}", 
+                    "{{ $activity["date"] }}", 
                 @endforeach
             ], // 日付のラベル
 
@@ -132,7 +132,7 @@
                     label: "有酸素",
                     data: [
                         @foreach($activityCounts as $activity)
-                            {{ $activity->total_aerobic }},
+                            {{ $activity["total_aerobic"] }},
                         @endforeach
                     ],  // 有酸素データ
                     backgroundColor: "#59C3DC", // 有酸素の棒色
@@ -141,7 +141,7 @@
                     label: "無酸素",
                     data: [
                         @foreach($activityCounts as $activity)
-                            {{ $activity->total_anoxic }},
+                            {{ $activity["total_anoxic"] }},
                         @endforeach
                     ],  // 無酸素データ
                     backgroundColor: "#134074", // 無酸素の棒色
@@ -205,6 +205,7 @@
         };
 
         // canvasにグラフを描画
+        console.log(data);
         const ctx = document.querySelector("#activityChart");
         const activityChart = new Chart(ctx, {
             type: "bar",
