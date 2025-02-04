@@ -15,7 +15,6 @@ class Account extends Model implements Authenticatable
         "email",
         "password",
         "profile_pic", 
-        "weekly_total", 
         "profile_word", 
         "birthday_year",
         "birthday_month",
@@ -26,16 +25,9 @@ class Account extends Model implements Authenticatable
         "follower", 
         "target", 
         "lifestyle",
-        "daily_aerobic", 
-        "daily_anoxic", 
-        "exercise_time"
     ];
 
     protected $attributes = [
-        "daily_aerobic" => 0,
-        "daily_anoxic" => 0,
-        "exercise_time" => 0,
-        "weekly_total" => 0,
         "profile_word" => "",
         "birthday_year" => 0,
         "birthday_day" => 0,
@@ -61,5 +53,10 @@ class Account extends Model implements Authenticatable
     public function likedPosts()
     {
         return $this->belongsToMany(Post::class, 'likes');
+    }
+
+    public function activites()
+    {
+        return $this->hasMany(Activity::class, 'author_id');
     }
 }
