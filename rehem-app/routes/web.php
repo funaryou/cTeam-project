@@ -9,10 +9,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+#->middleware('auth')
 
 Route::prefix("/rehem")->group(function(){
     Route::get("/main", [AccountController::class, "top"])->name("top");
     Route::get("/profile", [AccountController::class, "profile"])->name("profile");
+<<<<<<< HEAD
+=======
+    Route::get("prof_update", [AccountController::class, "prof_update"])->name("prof_update");
+>>>>>>> badc04dfbdf550d7bcfaa905c5d656fd394a4f54
     Route::get("/record", [AccountController::class, "record"])->name("record");
     Route::post("/", [AccountController::class, "day_record"])->name("day_record");
 });

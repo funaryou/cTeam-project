@@ -38,6 +38,20 @@ class AccountController extends Controller
         return view("profile");
     }
 
+    public function prof_update(Request $request, $id)
+    {
+        $account = Account::find($id);
+        $account -> update([
+            "profile_word" => $account -> profile_word,
+            "stature" => $account -> stature,
+            "weight" => $account -> weight,
+            "target" => $account ->target,
+            "lifestyle" => $account -> lifestyle
+        ]);
+
+        return redirect()->route("profile");
+    }
+
     public function record()
     {
         return view("record");
