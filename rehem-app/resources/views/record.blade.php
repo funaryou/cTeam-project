@@ -11,12 +11,12 @@
                     <div class="divider"></div>
                     <div class="buttonWrapper">
                         <label class="switchOxyButton active">
-                            <input type="radio" name="oxygen" value="aerobic">
+                            <input type="radio" name="aerobic" value="aerobic">
                             <div class="aerobicIcon icon"></div>
                             <p>有酸素</p>
                         </label>
                         <label class="switchOxyButton">
-                            <input type="radio" name="oxygen" value="aerobic">
+                            <input type="radio" name="anoxic" value="aerobic">
                             <div class="anoxicIcon icon"></div>
                             <p>無酸素</p>
                         </label>
