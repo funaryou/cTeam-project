@@ -514,7 +514,7 @@ section.recordForm{
                 opacity: 1;
             }
 
-            &.active{
+            &:has(input:checked){
                 background-color: var(--mainColor);
                 color: var(--backgroundColor);
                 opacity: 1;

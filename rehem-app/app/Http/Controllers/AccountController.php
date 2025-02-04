@@ -19,7 +19,7 @@ class AccountController extends Controller
         $sevenDaysAgo = Carbon::now()->subDays(6)->startOfDay();
         $today = Carbon::now()->endOfDay();
 
-        $activityCounts = Activity::selectRaw('DATE(record_at) as date, SUM(daily_aerobic) as total_aerobic, SUM(dairy_anoxic) as total_anoxic')
+        $activityCounts = Activity::selectRaw('DATE(record_at) as date, SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
             ->whereBetween('record_at', [$sevenDaysAgo, $today])
             ->groupBy('date')
             ->orderBy('date', 'asc')
@@ -85,6 +85,27 @@ class AccountController extends Controller
         $account = Auth::user();
         
         return view("record", compact("account"));
+    }
+
+    public function day_record(Request $request) {
+
+        $user = Auth::user();
+
+        if ($request->input('oxy') == "aerobic" ) {
+            Activity::create([
+                "daily_aerobic" => $request-> input("value"),
+                "daily_anoxic" => 0,
+                "author_id" => $user->id,
+            ]);
+        } else {
+            Activity::create([
+                "daily_aerobic" => 0,
+                "daily_anoxic" => $request-> input("value"),
+                "author_id" => $user->id,
+            ]);
+        }
+        return view("rehem.main");
+
     }
 
     public function register()
