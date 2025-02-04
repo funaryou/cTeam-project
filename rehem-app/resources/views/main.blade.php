@@ -9,25 +9,25 @@
             <div class="wrapper">
                 <div class="todayTotal">
                     <p class="title">今日</p>
-                    <p class="count">{{$activityCountsToday->total_aerobic}}</p>
+                    <p class="count">@formatTime($total_sum)</p>
                 </div>
                 <div class="weeklyTotal">
                     <p class="title">今週</p>
-                    <p class="count">100時間</p>
+                    <p class="count">@formatTime($weeklyTotals->total)</p>
                 </div>
             </div>
             <div class="wrapper">
                 <div class="oxygenPacentage">
                     <div class="wrapper">
                         <div class="aerobicIcon icon"></div>
-                        <p class="aerobic">有酸素 20%</p>
+                        <div class="aerobic textWrapper"><h2>{{$aerobicPercent}}%</h2><p>有酸素</p></div>
                     </div>
                     <div class="wrapper">
                         <div class="anoxicIcon icon"></div>
-                        <p class="anoxic">無酸素 80%</p>
+                        <div class="anoxic textWrapper"><h2>{{$anoxicPercent}}%</h2><p>無酸素</p></div>
                     </div>
                 </div>
-                <a href="{{ route('record') }}" class="commonXLButton">筋トレした！</a>
+                <a href="{{ route('record') }}" class="commonXLButton"><div class="icon record"></div><p>筋トレした！</p></a>
             </div>
         </div>
     </section>
@@ -38,27 +38,33 @@
                 <div class="postFormItem">
                     <div class="wrapper">
                         <div class="userIcon"></div>
-                        <input class="postInput" type="text" name="content" value="{{ old('content') }}" placeholder="今何してる？">
+                        <input class="postInput" type="text" name="content" value="{{ old('content') }}" placeholder="今何してる？" required>
                     </div>
-                    <button class="commonButton" type="submit">投稿する</button>
+                    <button class="commonButton" type="submit"><div class="icon post"></div><p>投稿する</p></button>
                 </div>
             </form>
         </article>
         <article class="postFeed">
-            @foreach ($posts as $post)
             <ul>
-                <li class="postCard">
-                    <div class="wrapper">
-                        <div class="userIcon"></div>
-                        <div class="likeIndicator">
-                            <p class="likeCount">{{ $post["likes"] }}</p>
+                @foreach ($posts as $post)
+            
+                    <li class="postCard">
+                        <div class="wrapper">
+                            <a href="{{ route('profile', ['id' => $post->author->id]) }}" class="user">
+                                <div class="userIcon"></div>
+                                <p>{{ $post->author->user_name}}</p>
+                            </a>
+                            
+                            <div class="likeIndicator">
+                                <p class="likeCount">{{ $post["likes"] }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <p class="postContent">{{ $post["content"] }}</p>
-                    <div class="divider"></div>
-                </li>
+                        <p class="postContent">{{ $post["content"] }}</p>
+                        <div class="divider"></div>
+                    </li>
+            
+                @endforeach
             </ul>
-            @endforeach
             {{-- <ul>
                 <li class="postCard">
                     <div class="wrapper">

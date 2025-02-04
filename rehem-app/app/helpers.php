@@ -13,9 +13,9 @@ if (!function_exists('formatTime')) {
         $remainingMinutes = $minutes % 60;
 
         if ($hours === 0) {
-            return "{$remainingMinutes}分";
+            return "<span class='highlight'>{$remainingMinutes}</span><span>分</span>";
         } else {
-            return "{$hours}時間{$remainingMinutes}分";
+            return "<span class='highlight'>{$hours}</span><span>時間</span><span class='highlight'>{$remainingMinutes}</span><span>分</span>";
         }
     }
 }

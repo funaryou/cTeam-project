@@ -19,7 +19,7 @@
                 <h2 class="title">プロフィール</h2>
                 <table>
                     <tr>
-                        <th>生年月日</th><td><input name="birthday_year" type="text" placeholder="{{$account->birthday_year}}"></td>
+                        <th>生年月日</th><td><input name="age" type="text" placeholder="{{$account->age}}"></td>
                     </tr>
                     <tr>
                         <th>身長</th><td><input name="stature" type="text" placeholder="{{$account->stature}}"></td>
