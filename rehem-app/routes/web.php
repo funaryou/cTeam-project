@@ -9,16 +9,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-#->middleware('auth')
+
 
 Route::prefix("/rehem")->group(function(){
-    Route::get("/main", [AccountController::class, "top"])->name("top");
-    Route::get("/{id}/profile", [AccountController::class, "profile"])->name("profile");
-    Route::get("/{id}/prof_update", [AccountController::class, "prof_update"])->name("prof_update");
-    Route::get("/{id}/edit", [AccountController::class, "edit"])->name("edit");
-    Route::get("/record", [AccountController::class, "record"])->name("record");
-    Route::post('/recode', [RecodeGetController::class, 'recode_get'])->name('recode_get');
-    Route::post("/", [AccountController::class, "day_record"])->name("day_record");
+    Route::get("/main", [AccountController::class, "top"])->name("top")->middleware('auth');
+    Route::get("/{id}/profile", [AccountController::class, "profile"])->name("profile")->middleware('auth');
+    Route::get("/{id}/prof_update", [AccountController::class, "prof_update"])->name("prof_update")->middleware('auth');
+    Route::get("/{id}/edit", [AccountController::class, "edit"])->name("edit")->middleware('auth');
+    Route::get("/record", [AccountController::class, "record"])->name("record")->middleware('auth');
+    Route::post('/recode', [RecodeGetController::class, 'recode_get'])->name('recode_get')->middleware('auth');
+    Route::post("/", [AccountController::class, "day_record"])->name("day_record")->middleware('auth');
 });
 
 
