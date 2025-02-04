@@ -8,7 +8,7 @@ class Activity extends Model
 {
     protected $fillable = [
         'daily_aerobic',
-        'dairy_anoxic',
+        'daily_anoxic',
         'record_at',
         'author_id'
     ];
