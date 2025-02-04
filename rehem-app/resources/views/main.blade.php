@@ -9,7 +9,7 @@
             <div class="wrapper">
                 <div class="todayTotal">
                     <p class="title">今日</p>
-                    <p class="count">20時間</p>
+                    <p class="count">{{ $account->user_name }}</p>
                 </div>
                 <div class="weeklyTotal">
                     <p class="title">今週</p>
