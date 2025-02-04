@@ -33,6 +33,15 @@ return new class extends Migration
             $table->integer("exercise_time");
             $table->timestamps();
         });
+        
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary(); // セッションID
+            $table->foreignId('user_id')->nullable()->index(); // ユーザーID（オプション）
+            $table->string('ip_address', 45)->nullable(); // IPアドレス
+            $table->text('user_agent')->nullable(); // ユーザーエージェント
+            $table->longText('payload'); // セッションデータ
+            $table->integer('last_activity')->index(); // 最後のアクティビティのタイムスタンプ
+        });
     }
 
     /**

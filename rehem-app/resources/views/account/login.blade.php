@@ -7,7 +7,7 @@
 </head>
 <body>
     login 
-    <form method="POST" action="{{ route('login.submit') }}">
+    <form method="POST" action="{{ route('login') }}">
         @csrf
         mailaddress:
         <input type="email" name="email" required>
@@ -16,9 +16,7 @@
         <input type="password" name="password" required>
 
         <button type="submit">login</button>
-    </form>
-
-    @if ($errors->any())
+        @if ($errors->any())
         <div>
             <ul>
                 @foreach ($errors->all() as $error)
@@ -26,6 +24,19 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+        @endif
+    </form>
+    
+    @if ($user)
+    <p>User Name: {{ $user->user_name }}</p>
+    <p>Email: {{ $user->email }}</p>
+    <p>Profile Picture: <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture"></p>
+    <!-- 他のユーザー情報も表示できます -->
+@else
+    <p>No user is logged in.</p>
+@endif
+
+<a href="{{ route('logout') }}">Logout</a>
+
 </body>
 </html>

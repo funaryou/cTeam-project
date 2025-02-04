@@ -54,7 +54,7 @@ class AccountController extends Controller
             "user_name" => 'required|string|max:255|unique:accounts',
             "email" => 'required|string|email|max:255|unique:accounts',
             'password' => 'required|string|min:8|confirmed',
-            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif.svg|max:2048',
         ]);
 
         $profilePicPath = null;

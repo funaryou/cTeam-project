@@ -21,9 +21,10 @@ Route::prefix("/rehem")->group(function(){
 Route::prefix("/account")->group(function(){
     Route::get('/register', [AccountController::class, 'register'])->name('register');
     Route::post('/register', [AccountController::class, 'create_account'])->name("create_account");
-    Route::get('/login', [LoginController::class, 'LoginForm'])->name('login'); // GETメソッドを追加
-    Route::post('/login', [LoginController::class, 'login'])->name('login.submit'); // ログイン処理用POSTメソッド
+    Route::get('/login', [LoginController::class, 'LoginForm'])->name('LoginForm'); // GETメソッドを追加
+    Route::post('/login', [LoginController::class, 'login'])->name('login'); // ログイン処理用POSTメソッド
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/guest-login', [LoginController::class, 'guest'])->name('logingest');
 });
 
 
