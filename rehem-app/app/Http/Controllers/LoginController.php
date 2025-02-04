@@ -79,16 +79,5 @@ class LoginController extends Controller
         return view("account.guest");
     }
 
-    public function guest()
-    {
-        $guestUserID=1;
-        $user = Account::find($guestUserID);
 
-        if ($user) {
-            Auth::login($user);
-            return redirect()->route("rehem.main");
-        } else {
-            return redirect()->route("login");
-        }
-    }
 }
