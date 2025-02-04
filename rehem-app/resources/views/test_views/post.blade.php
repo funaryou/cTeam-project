@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 </head>
 <body>
     test
-    <form method="POST" action="{{ route("store") }}">
+    <form method="POST" action="{{ route("rehem.post_store") }}">
         @csrf
         <br>
         content:<textarea placeholder="新規POST" name="content"></textarea>
@@ -28,4 +28,4 @@
 
     @endforeach
 </body>
-</html>
+</html> --}}

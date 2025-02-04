@@ -12,14 +12,15 @@ Route::get('/', function () {
 #->middleware('auth')
 
 Route::prefix("/rehem")->group(function(){
-    Route::get("/main", [AccountController::class, "top"])->name("top");
-    Route::get("/{id}/profile", [AccountController::class, "profile"])->name("profile");
-    Route::get("/{id}/prof_update", [AccountController::class, "prof_update"])->name("prof_update");
-    Route::get("/{id}/edit", [AccountController::class, "edit"])->name("edit");
-    Route::get("/record", [AccountController::class, "record"])->name("record");
-    Route::post("/day_record", [AccountController::class, "day_record"])->name("day_record");
-    Route::post('/recode', [RecodeGetController::class, 'recode_get'])->name('recode_get');
-    Route::post("/", [AccountController::class, "day_record"])->name("day_record");
+    Route::get("/main", [AccountController::class, "top"])->name("top")->middleware('auth');
+    Route::get("/{id}/profile", [AccountController::class, "profile"])->name("profile")->middleware('auth');
+    Route::get("/{id}/prof_update", [AccountController::class, "prof_update"])->name("prof_update")->middleware('auth');
+    Route::get("/{id}/edit", [AccountController::class, "edit"])->name("edit")->middleware('auth');
+    Route::post('/post/store', [PostController::class, 'post_store'])->name('rehem.post_store')->middleware('auth');
+    Route::get("/record", [AccountController::class, "record"])->name("record")->middleware('auth');
+    Route::post("/day_record", [AccountController::class, "day_record"])->name("day_record")->middleware('auth');
+    Route::post('/recode', [RecodeGetController::class, 'recode_get'])->name('recode_get')->middleware('auth');
+    Route::post("/", [AccountController::class, "day_record"])->name("day_record")->middleware('auth');
 });
 
 
@@ -35,10 +36,10 @@ Route::prefix("/account")->group(function(){
 
 
 
-Route::prefix("/test")->group(function(){
-    Route::get('/post', [PostController::class, 'test'])->name('test')->middleware('auth');
-    Route::post('/post', [PostController::class, 'store'])->name('store')->middleware('auth'); 
-});
+// Route::prefix("/test")->group(function(){
+//     Route::get('/post', [PostController::class, 'test'])->name('test')->middleware('auth');
+//     Route::post('/post', [PostController::class, 'store'])->name('store')->middleware('auth'); 
+// });
 
 // aaa
 

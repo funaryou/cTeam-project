@@ -1,18 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Models\Account;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Models\Account;
 use App\Models\Activity;
+use App\Models\Post;
+use Carbon\Carbon;
 
 
 class AccountController extends Controller
 {
     public function top()
     {
+        $posts = Post::all();
         $account = Auth::user();
 
     $sevenDaysAgo = Carbon::now()->subDays(6)->startOfDay();
@@ -45,23 +47,8 @@ class AccountController extends Controller
         ->whereDate('record_at', Carbon::today())
         ->first();
 
-        return view("main",compact('activityCounts', 'account', 'activityCountsToday'));
+        return view("main",compact('activityCounts', 'account', 'activityCountsToday',"posts"));
     }
-
-    // public function __construct()
-    // {
-    //     $this->account_db = function (){
-    //         $accounts = Account::all();
-    //         return redirect()->route("post");
-    //     };
-    // }
-
-    // public function post()
-    // {
-    //     $account = ($this->account_db)();
-
-    //     return redirect()->route("views.main");
-    // }
 
     public function profile($id)
     {
