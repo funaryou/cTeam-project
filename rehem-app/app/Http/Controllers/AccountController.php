@@ -16,45 +16,113 @@ class AccountController extends Controller
     {
         $posts = Post::all();
         $account = Auth::user();
+        $userId = $account->id;
 
-    $sevenDaysAgo = Carbon::now()->subDays(6)->startOfDay();
-    $today = Carbon::now()->endOfDay();
+        $sevenDaysAgo = Carbon::now()->subDays(6)->startOfDay();
+        $today = Carbon::now()->endOfDay();
 
-    // ① DBからデータ取得（日付ごとに集計）
-    $activityData = Activity::selectRaw('DATE(record_at) as date, SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
+        // ① DBからデータ取得（日付ごとに集計）
+        $activityData = Activity::selectRaw('DATE(record_at) as date, SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
+        ->where('author_id', $userId) // ユーザーごとに絞り込み
         ->whereBetween('record_at', [$sevenDaysAgo, $today])
         ->groupBy('date')
         ->orderBy('date', 'asc')
         ->get()
         ->keyBy('date'); // 日付をキーにする
 
-    // ② 7日分の日付を作成し、データがない日は 0 で補完
-    $dates = collect();
-    for ($i = 6; $i >= 0; $i--) {
-        $date = Carbon::now()->subDays($i)->toDateString();
-        $dates[$date] = [
-            'date' => $date,
-            'total_aerobic' => $activityData[$date]->total_aerobic ?? 0,
-            'total_anoxic' => $activityData[$date]->total_anoxic ?? 0,
-        ];
-    }
+        $dates = collect();
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i)->toDateString();
+            $dates[$date] = [
+                'date' => $date,
+                'total_aerobic' => $activityData[$date]->total_aerobic ?? 0,
+                'total_anoxic' => $activityData[$date]->total_anoxic ?? 0,
+            ];
+        }
 
-    // ③ Laravel に渡すデータを修正
-    $activityCounts = $dates->values(); // コレクションを配列に変換
+        // ③ Laravel に渡すデータを修正
+        $activityCounts = $dates->values(); // コレクションを配列に変換
 
-    // 今日のデータ
-    $activityCountsToday = Activity::selectRaw('SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
-        ->whereDate('record_at', Carbon::today())
-        ->first();
+        // 今日のデータ
+        $activityCountsToday = Activity::selectRaw('SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
+            ->where('author_id', $userId) // ユーザーごとに絞り込み
+            ->whereDate('record_at', Carbon::today())
+            ->first();
 
-        return view("main",compact('activityCounts', 'account', 'activityCountsToday',"posts"));
+        $weeklyTotals = Activity::selectRaw('SUM(daily_aerobic + daily_anoxic) as total')
+            ->where('author_id', $userId) // ユーザーごとに絞り込み
+            ->whereBetween('record_at', [$sevenDaysAgo, $today])
+            ->first();
+
+        $total_aerobic = $activityCountsToday->total_aerobic ?? 0;
+        $total_anoxic = $activityCountsToday->total_anoxic ?? 0;
+        $total_sum = $total_aerobic + $total_anoxic;
+
+        if ($total_sum > 0) {
+            $aerobicPercent = round(($total_aerobic / $total_sum * 100));
+            $anoxicPercent = round($total_anoxic / $total_sum * 100);
+        } else {
+            $aerobicPercent = 0;
+            $anoxicPercent = 0;
+        }
+
+        return view("main",compact('activityCounts', 'account', 'activityCountsToday',"posts", "total_sum", "aerobicPercent", "anoxicPercent", "weeklyTotals"));
     }
 
     public function profile($id)
     {
         $account = Account::find($id);
+        $userId = $account->id;
+
+        $sevenDaysAgo = Carbon::now()->subDays(6)->startOfDay();
+        $today = Carbon::now()->endOfDay();
+
+        // ① DBからデータ取得（日付ごとに集計）
+        $activityData = Activity::selectRaw('DATE(record_at) as date, SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
+        ->where('author_id', $userId) // ユーザーごとに絞り込み
+        ->whereBetween('record_at', [$sevenDaysAgo, $today])
+        ->groupBy('date')
+        ->orderBy('date', 'asc')
+        ->get()
+        ->keyBy('date'); // 日付をキーにする
+
+        $dates = collect();
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i)->toDateString();
+            $dates[$date] = [
+                'date' => $date,
+                'total_aerobic' => $activityData[$date]->total_aerobic ?? 0,
+                'total_anoxic' => $activityData[$date]->total_anoxic ?? 0,
+            ];
+        }
+
+        // ③ Laravel に渡すデータを修正
+        $activityCounts = $dates->values(); // コレクションを配列に変換
+
+        // 今日のデータ
+        $activityCountsToday = Activity::selectRaw('SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
+            ->where('author_id', $userId) // ユーザーごとに絞り込み
+            ->whereDate('record_at', Carbon::today())
+            ->first();
+
+        $weeklyTotals = Activity::selectRaw('SUM(daily_aerobic + daily_anoxic) as total')
+            ->where('author_id', $userId) // ユーザーごとに絞り込み
+            ->whereBetween('record_at', [$sevenDaysAgo, $today])
+            ->first();
+
+        $total_aerobic = $activityCountsToday->total_aerobic ?? 0;
+        $total_anoxic = $activityCountsToday->total_anoxic ?? 0;
+        $total_sum = $total_aerobic + $total_anoxic;
+
+        if ($total_sum > 0) {
+            $aerobicPercent = round(($total_aerobic / $total_sum * 100));
+            $anoxicPercent = round($total_anoxic / $total_sum * 100);
+        } else {
+            $aerobicPercent = 0;
+            $anoxicPercent = 0;
+        }
         
-        return view("profile", compact("account"));
+        return view("profile", compact("id",'activityCounts', 'account', 'activityCountsToday', "total_sum", "aerobicPercent", "anoxicPercent", "weeklyTotals"));
     }
 
 
@@ -65,6 +133,7 @@ class AccountController extends Controller
             "user_name" => $request->input('user_name')?: $account->user_name,
             "profile_word" => $request->input('profile_word', "") ?: $account->profile_word,
             "stature" => $request->input('stature')?: $account->stature,
+            "age" => $request->input('age')?: $account->age,
             "weight" => $request->input('weight')?: $account->weight,
             "target" => $request->input('target')?: $account->target,
             "lifestyle" => $request->input('lifestyle')?: $account->lifestyle,
@@ -87,8 +156,10 @@ class AccountController extends Controller
     public function record()
     {
         $account = Auth::user();
+        $today = Carbon::today();
+        $today = Carbon::today()->locale('ja')->isoFormat('YYYY年MM月DD日');
         
-        return view("record", compact("account"));
+        return view("record", compact("account", "today"));
     }
 
     public function day_record(Request $request) {

@@ -1,3 +1,4 @@
+
 @charset "utf-8";
 
 :root{
@@ -9,6 +10,7 @@
     --dimColor: #DAD2D8;
     --sliderHoverColor: #C8BCC5;
     --sliderActiveColor: #AAE1EE;
+    --greenColor: #3EC300;
     /* variable */
     --sidebarWidth: 72px;
     --mainBorderRadius: 18px;
@@ -24,12 +26,83 @@
     --color-convert-accentColor: invert(64%) sepia(77%) saturate(2111%) hue-rotate(3deg) brightness(102%) contrast(91%);
 }
 
+.navItem {
+    will-change: filter;
+    transition: all 0.3s ease-in-out;
+}
+
+/* すべての.navItemを暗くする */
+.nav:hover .navItem {
+
+    &.addRecord{
+        background-image: url(../img/addRecordIcon.svg)!important;
+        filter: none !important;
+
+        &:hover{
+            background-image: url(../img/addRecordIcon-Active.svg) !important;
+            filter: drop-shadow(0 0 12px var(--subColor)) !important;
+        }
+    }
+
+    &.profile{
+        background-image: url(../img/profileIcon.svg)!important;
+        filter: none !important;
+
+        &:hover{
+            background-image: url(../img/profileIcon-Active.svg)!important;
+            filter: drop-shadow(0 0 12px var(--subColor)) !important;
+        }
+    }
+
+    &.home{
+        background-image: url(../img/homeIcon.svg)!important;
+        filter: none !important;
+
+        &:hover{
+            background-image: url(../img/homeIcon-Active.svg)!important;
+            filter: drop-shadow(0 0 12px var(--subColor)) !important;
+        }
+    }
+}
+
+/* ホバーされた.navItemは元の明るさに */
+.navItem:hover {
+    &.addRecord{
+        background-image: url(../img/addRecordIcon-Active.svg);
+    }
+
+    &.profile{
+        background-image: url(../img/profileIcon-Active.svg);
+    }
+
+    &.home{
+        background-image: url(../img/homeIcon-Active.svg);
+    }
+}
+
+
 body{
     background-color: var(--backgroundColor);
     font-family: "Noto Sans JP", serif;
     font-optical-sizing: auto;
     font-style: normal;
     color: var(--subColor);
+}
+
+& span:not(.highlight){
+    opacity: 0.66;
+    font-size: 30px;
+}
+
+& span.highlight{
+    font-size: 60px;
+    margin: 0 12px;
+    opacity: 1;
+
+    &:first-child{
+        margin: 0;
+        margin-right: 12px;
+    }
 }
 
 canvas {
@@ -70,36 +143,30 @@ header.sidebar{
 
             &.home{
                 background-image: url(../img/homeIcon.svg);
-                filter: var(--color-convert-backgroundColor);
 
                 &.active{
-                    background-image: url(../img/homeIcon.svg);
-                    filter: var(--color-convert-subColor);
+                    background-image: url(../img/homeIcon-Active.svg);
                 }
             }
 
             &.addRecord{
                 background-image: url(../img/addRecordIcon.svg);
-                filter: var(--color-convert-backgroundColor);
 
                 &.active{
-                    background-image: url(../img/addRecordIcon.svg);
-                    filter: var(--color-convert-subColor);
+                    background-image: url(../img/addRecordIcon-Active.svg);
                 }
             }
 
             &.profile{
                 background-image: url(../img/profileIcon.svg);
-                filter: var(--color-convert-backgroundColor);
 
                 &.active{
-                    background-image: url(../img/profileIcon.svg);
-                    filter: var(--color-convert-subColor);
+                    background-image: url(../img/profileIcon-Active.svg);   
                 }
             }
 
             &.active{
-                filter: drop-shadow(0 0 24px var(--subColor));
+                filter: drop-shadow(0 0 12px var(--subColor));
             }
         }
 
@@ -128,8 +195,8 @@ input[type="range"] {
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        width: 18px;
-        height: 18px;
+        width: 30px;
+        height: 30px;
         background: var(--subColor);
         border-radius: 50%;
         cursor: pointer;
@@ -164,6 +231,57 @@ input[type="range"] {
     border-radius: var(--fullBorderRadius);
     color: var(--backgroundColor);
     cursor: pointer;
+    transition: all .25s;
+
+    &:hover{
+        filter: drop-shadow(0 4px 12px var(--mainColor));
+    }
+
+    &.edit:hover{
+        filter: drop-shadow(0 4px 12px var(--accentColor));
+    }
+    &.cancel:hover{
+        filter: none;
+        background-color: var(--dimColor) !important;
+    }
+}
+
+.icon{
+    width: 30px;
+    height: auto;
+    aspect-ratio: 1/1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 78%;
+    
+
+    &.post{
+        width: 24px;
+        background-image: url(../img/postIcon.svg);
+        margin-right: 12px;
+        filter: var(--color-convert-backgroundColor);
+    }
+
+    &.record{
+        width: 30px;
+        background-image: url(../img/checkCycleIcon.svg);
+        margin-right: 12px;
+        filter: var(--color-convert-backgroundColor);
+    }
+
+    &.calender{
+        width: 30px;
+        background-image: url(../img/calenderIcon.svg);
+        margin-right: 12px;
+        filter: var(--color-convert-subColor);
+    }
+
+    &.edit{
+        width: 24px;
+        background-image: url(../img/editIcon.svg);
+        margin-right: 12px;
+        filter: var(--color-convert-backgroundColor);
+    }
 }
 
 .commonXLButton{
@@ -177,6 +295,14 @@ input[type="range"] {
     font-size: 18px;
     font-weight: var(--boldFont);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .25s;
+
+    &:hover{
+        filter: drop-shadow(0 4px 12px var(--mainColor));
+    }
 }
 
 main{
@@ -206,6 +332,14 @@ section.record{
     flex-direction: column;
     justify-content: space-between;
 
+    &.onProfile{
+        width: 100%;
+
+        & .indicator{
+            gap: 18px;   
+        }
+    }
+
     & .graph{
         width: 100%;
         height: 300px;
@@ -218,16 +352,26 @@ section.record{
         display: flex;
         flex-direction: column;
         justify-content: center;
+        gap: 30px;
         & .wrapper{
             display: flex;
-            gap: 72px;
-            margin: 24px 0;
+            gap: 24px;
             align-items: center;
 
             & .title{
                 color: var(--subColor);
                 font-weight: var(--boldFont);
                 font-size: 24px;
+            }
+
+            & .todayTotal, .weeklyTotal{
+                padding: 24px;
+                border: solid 1px var(--dimColor);
+                border-radius: calc(var(--mainBorderRadius) / 2);
+            }
+
+            & .weeklyTotal .count{
+                color: var(--greenColor);
             }
 
             & .count{
@@ -237,19 +381,26 @@ section.record{
             }
 
             & .oxygenPacentage{
+                display: flex;
+                flex-direction: row;
+                gap: 24px;
 
                 & .wrapper{
                     display: flex;
+                    padding: 24px;
                     gap: 12px;
                     align-items: center;
+                    border: solid 1px var(--dimColor);
+                    border-radius: calc(var(--mainBorderRadius) / 2);
+                    
 
                     & .icon{
-                        width: 48px;
+                        width: 60px;
                         height: auto;
                         aspect-ratio: 1/1;
                         background-position: center;
                         background-repeat: no-repeat;
-                        background-size: 78%;
+                        background-size: 100%;
         
                         &.aerobicIcon{
                             background-image: url(../img/aerobicIcon.svg);
@@ -260,11 +411,11 @@ section.record{
                             filter: var(--color-convert-subColor);
                         }
                     }
-                    & p{
-                        font-weight: var(--boldFont);
-                        font-size: 30px;
-                        margin: 12px 0;
-    
+                    .textWrapper{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0px;
+
                         &.aerobic{
                             color: var(--mainColor);
                         }
@@ -272,7 +423,21 @@ section.record{
                         &.anoxic{
                             color: var(--subColor);
                         }
+
+                        & h2{
+                            font-weight: var(--boldFont);
+                            font-size: 60px;
+                            line-height: 0.8;
+                        }
+
+                        & p{
+                            font-weight: var(--boldFont);
+                            font-size: 24px;
+                            opacity: .6;
+                            
+                        }
                     }
+                    
                 }
             }
         }
@@ -366,6 +531,12 @@ section.post{
                     width: 100%;
                     height: fit-content;
 
+                    & .user{
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                    }
+
                     .likeIndicator{
                         display: flex;
                         align-items: center;
@@ -457,6 +628,9 @@ section.recordForm{
         border: solid 1px var(--dimColor);
         border-radius: var(--mainBorderRadius);
         box-shadow: var(--mainShadow);
+        display: flex;
+        justify-content: start;
+        align-items: center;
     }
 
     & .recordFormItem{
@@ -520,10 +694,14 @@ section.recordForm{
                 opacity: 1;
             }
 
-            &:has(input:checked){
+            &:has(:checked){
                 background-color: var(--mainColor);
                 color: var(--backgroundColor);
                 opacity: 1;
+
+                &:has(input[value="anoxic"]){
+                    background-color: var(--subColor);
+                }
 
                 & .icon{
                     filter: var(--color-convert-backgroundColor);   
@@ -539,19 +717,17 @@ section.recordForm{
                 font-size: 30px;
                 font-weight: var(--boldFont);
                 color: var(--accentColor);
-
-                & span:not(.highlight){
-                    opacity: 0.66;
-                }
-
-                & span.highlight{
-                    font-size: 60px;
-                    margin: 0 12px;
-                    opacity: 1;
-                }
             }
         }
     }
+}
+
+.profileWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 42px;
 }
 
 .userProfile{
@@ -561,10 +737,15 @@ section.recordForm{
     gap: 48px;
     align-items: center;
 
+    & ::placeholder{
+        opacity: 0.5;
+    }
+
     & input, textarea{
         border: solid 1px var(--dimColor);
-        border-radius: 6px;
-
+        border-radius: calc(var(--mainBorderRadius) / 2);
+        padding: 12px 24px;
+        margin: 20px;
     }
     
     & .upperSection{
@@ -575,7 +756,8 @@ section.recordForm{
         box-shadow: var(--mainShadow);
         display: flex;
         gap: 48px;
-        width: 60%;
+        width: 100%;
+        height: 100%;
 
         & .commonButton{
             &.edit{
@@ -584,7 +766,7 @@ section.recordForm{
             }
 
             &.cancel{
-                background-color: var(--dimColor);
+                background-color: var(--backgroundColor);
                 color: var(--subColor);
             }
         }
@@ -621,7 +803,7 @@ section.recordForm{
             flex-direction: column;
             justify-content: start;
             align-items: end;
-            gap: 6px;
+            gap: 12px;
             height: 100%;
             width: 100%;
         }
@@ -629,11 +811,11 @@ section.recordForm{
 
     & .divider{
         /* border-color: var(--subColor); */
-        width: 60%;
+        width: 100%;
     }
 
     & .lowerSection{
-        width: 60%;
+        width: 100%;
         display: flex;
         align-items: center;
         gap: 48px;
@@ -718,5 +900,54 @@ section.recordForm{
                 }
             }
         }
+    }
+}
+
+main.login{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+.loginCard{
+    margin: auto;
+    width: 40%;
+    /* height: 40%; */
+    padding: 30px;
+    padding-top: 90px;
+    background-color: var(--backgroundColor);
+    overflow: hidden;
+    border: solid 1px var(--dimColor);
+    border-radius: var(--mainBorderRadius);
+    box-shadow: var(--mainShadow);
+    position: relative;
+
+    & input, textarea{
+        border: solid 1px var(--dimColor);
+        border-radius: calc(var(--mainBorderRadius) / 2);
+        padding: 6px 12px;
+        margin-left: 12px;
+    }
+
+    & .banner{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        background-color: var(--mainColor);
+        color: var(--backgroundColor);
+        font-weight: var(--boldFont);
+        font-size: 18px;
+    }
+
+    & .loginForm{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
     }
 }

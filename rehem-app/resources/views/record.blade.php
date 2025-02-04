@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="recordForm">
-        <div class="date">2xxx年xxx月xxx日</div>
+        <div class="date"><div class="icon calender"></div><p>{{$today}}</p></div>
         <div class="recordFormItem">
             <form action="{{ route('day_record') }}" method="POST" class="column">
                 @csrf
@@ -30,7 +30,7 @@
                     <p class="sliderValue" id="sliderValue"><span class="highlight">0</span><span>分</span></p>
                     <div class="divider"></div>
                 </article>
-                <button type="submit" class="commonXLButton">記録する</button>
+                <button type="submit" class="commonXLButton"><div class="icon record"></div><p>記録する</p></button>
             </form>
         </div>
     </section>

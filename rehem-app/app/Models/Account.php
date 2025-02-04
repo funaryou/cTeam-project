@@ -16,9 +16,7 @@ class Account extends Model implements Authenticatable
         "password",
         "profile_pic", 
         "profile_word", 
-        "birthday_year",
-        "birthday_month",
-        "birthday_day",
+        "age",
         "stature", 
         "weight", 
         "follow", 
@@ -29,14 +27,12 @@ class Account extends Model implements Authenticatable
 
     protected $attributes = [
         "profile_word" => "",
-        "birthday_year" => 0,
-        "birthday_day" => 0,
-        "birthday_month" => 0,
+        "age" => 0,
         "stature" => 0,
         "weight" => 0,
         "follow" => 0,
         "follower" => 0,
-        "target" => 0,
+        "target" => "",
         "lifestyle" => "",
     ];
     

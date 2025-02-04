@@ -21,9 +21,7 @@ return new class extends Migration
             $table->integer("daily_anoxic");
             $table->integer("weekly_total");
             $table->text("profile_word");
-            $table->integer("birthday_year");
-            $table->integer("birthday_day");
-            $table->integer("birthday_month");
+            $table->integer("age");
             $table->integer("stature");
             $table->integer("weight");
             $table->integer("follow");
