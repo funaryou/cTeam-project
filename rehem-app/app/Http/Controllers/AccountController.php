@@ -27,8 +27,11 @@ class AccountController extends Controller
 
         // `main.blade.php` に `$activityCounts` を渡す
         // return view('main', );
+        $activityCountsToday = Activity::selectRaw('SUM(daily_aerobic) as total_aerobic, SUM(daily_anoxic) as total_anoxic')
+        ->whereDate('record_at', Carbon::today())
+        ->first();
 
-        return view("main",compact('activityCounts'), compact('account'));
+        return view("main",compact('activityCounts', 'account', 'activityCountsToday'));
     }
 
     // public function __construct()

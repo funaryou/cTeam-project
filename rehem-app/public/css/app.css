@@ -32,6 +32,12 @@ body{
     color: var(--subColor);
 }
 
+canvas {
+    width: 100%;    /* 横幅いっぱいに拡大 */
+    height: 300px;    /* 高さを80%に設定（任意で調整）*/
+    border-radius: 15px; /* 角を丸くする */
+}
+
 header.sidebar{
     width: var(--sidebarWidth);
     background-color: var(--mainColor);
