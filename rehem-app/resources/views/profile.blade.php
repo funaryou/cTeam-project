@@ -8,7 +8,7 @@
                 <p class="name">なかやまきんに君</p>
                 <p class="message">筋トレ大好き</p>
             </div>
-            <a href="{{route("prof_update")}}" class="commonButton edit">プロフィールを編集</a>
+            <a href="{{route("edit", ["id" => $account->id])}}" class="commonButton edit">プロフィールを編集</a>
         </article>
         <div class="divider"></div>
         <article class="lowerSection">

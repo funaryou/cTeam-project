@@ -13,8 +13,9 @@ Route::get('/', function () {
 
 Route::prefix("/rehem")->group(function(){
     Route::get("/main", [AccountController::class, "top"])->name("top");
-    Route::get("/profile", [AccountController::class, "profile"])->name("profile");
-    Route::get("prof_update", [AccountController::class, "prof_update"])->name("prof_update");
+    Route::get("/{id}/profile", [AccountController::class, "profile"])->name("profile");
+    Route::get("/{id}/prof_update", [AccountController::class, "prof_update"])->name("prof_update");
+    Route::get("/{id}/edit", [AccountController::class, "edit"])->name("edit");
     Route::get("/record", [AccountController::class, "record"])->name("record");
     Route::post('/recode', [RecodeGetController::class, 'recode_get'])->name('recode_get');
     Route::post("/", [AccountController::class, "day_record"])->name("day_record");

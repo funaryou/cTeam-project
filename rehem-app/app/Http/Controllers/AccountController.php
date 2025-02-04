@@ -46,15 +46,13 @@ class AccountController extends Controller
     //     return redirect()->route("views.main");
     // }
 
-
-
-
-
-    
-    public function profile()
+    public function profile($id)
     {
-        return view("profile");
+        $account = Account::find($id);
+        
+        return view("profile", compact("account"));
     }
+
 
     public function prof_update(Request $request, $id)
     {
@@ -70,9 +68,22 @@ class AccountController extends Controller
         return redirect()->route("profile");
     }
 
+    public function edit($id)
+    {
+        $account = Account::find($id);
+
+        return view("prof_update", compact("account"));
+    }
+
+
+
+
+
     public function record()
     {
-        return view("record");
+        $account = Auth::user();
+        
+        return view("record", compact("account"));
     }
 
     public function register()
