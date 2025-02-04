@@ -57,15 +57,16 @@ class AccountController extends Controller
     public function prof_update(Request $request, $id)
     {
         $account = Account::find($id);
-        $account -> update([
-            "profile_word" => $account -> profile_word,
-            "stature" => $account -> stature,
-            "weight" => $account -> weight,
-            "target" => $account ->target,
-            "lifestyle" => $account -> lifestyle
+        $account->update([
+            "user_name" => $request->input('user_name')?: $account->user_name,
+            "profile_word" => $request->input('profile_word', "") ?: $account->profile_word,
+            "stature" => $request->input('stature')?: $account->stature,
+            "weight" => $request->input('weight')?: $account->weight,
+            "target" => $request->input('target')?: $account->target,
+            "lifestyle" => $request->input('lifestyle')?: $account->lifestyle,
         ]);
 
-        return redirect()->route("profile");
+        return redirect()->route("profile",['id' => $id]);
     }
 
     public function edit($id)
