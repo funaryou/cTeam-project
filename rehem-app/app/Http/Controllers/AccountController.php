@@ -4,12 +4,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Account;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use App\Models\Activity;
 
 
 class AccountController extends Controller
 {
     public function top()
     {
+
+        $sevenDaysAgo = Carbon::now()->subDays(6)->startOfDay();
+        $today = Carbon::now()->endOfDay();
+
+        $activityCounts = Activity::selectRaw('DATE(record_at) as date, SUM(daily_aerobic) as total_aerobic, SUM(dairy_anoxic) as total_anoxic')
+            ->whereBetween('record_at', [$sevenDaysAgo, $today])
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get();
+
+        // `main.blade.php` に `$activityCounts` を渡す
+        return view('main', compact('activityCounts'));
+
         return view("main");
     }
 

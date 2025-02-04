@@ -14,12 +14,13 @@ Route::get('/', function () {
 Route::prefix("/rehem")->group(function(){
     Route::get("/main", [AccountController::class, "top"])->name("top");
     Route::get("/profile", [AccountController::class, "profile"])->name("profile");
-<<<<<<< HEAD
-=======
     Route::get("prof_update", [AccountController::class, "prof_update"])->name("prof_update");
->>>>>>> badc04dfbdf550d7bcfaa905c5d656fd394a4f54
     Route::get("/record", [AccountController::class, "record"])->name("record");
     Route::post("/", [AccountController::class, "day_record"])->name("day_record");
+    Route::get("/main", [AccountController::class, "top"])->name("top")->middleware('auth');
+    Route::get("/profile", [AccountController::class, "profile"])->name("profile")->middleware('auth');
+    Route::get("/record", [AccountController::class, "record"])->name("record")->middleware('auth');
+    Route::post("/", [AccountController::class, "day_record"])->name("day_record")->middleware('auth');
 });
 
 
@@ -28,7 +29,7 @@ Route::prefix("/account")->group(function(){
     Route::post('/register', [AccountController::class, 'create_account'])->name("create_account");
     Route::get('/login', [LoginController::class, 'LoginForm'])->name('LoginForm'); // GETメソッドを追加
     Route::post('/login', [LoginController::class, 'login'])->name('login'); // ログイン処理用POSTメソッド
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
     Route::get('/guest', [LoginController::class, 'view_guest'])->name('view_guest');
     Route::post('/guest', [LoginController::class, 'guest'])->name('guest');
 });
@@ -36,8 +37,8 @@ Route::prefix("/account")->group(function(){
 
 
 Route::prefix("/test")->group(function(){
-    Route::get('/post', [PostController::class, 'test'])->name('test');
-    Route::post('/post', [PostController::class, 'store'])->name('store'); 
+    Route::get('/post', [PostController::class, 'test'])->name('test')->middleware('auth');
+    Route::post('/post', [PostController::class, 'store'])->name('store')->middleware('auth'); 
 });
 
 // aaa

@@ -2,7 +2,9 @@
 
 @section('content')
     <section class="record">
-        <div class="graph"></div>
+        <div class="graph">
+            <canvas id="activityChart"></canvas>
+        </div>
         <div class="indicator">
             <div class="wrapper">
                 <div class="todayTotal">
@@ -110,4 +112,42 @@
             <button class="switchToFollowerButton">フォロー中</button>
         </article>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const labels = @json($activityCounts->pluck('date'));
+            const aerobicData = @json($activityCounts->pluck('total_aerobic'));
+            const anoxicData = @json($activityCounts->pluck('total_anoxic'));
+
+            const ctx = document.getElementById('activityChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: '有酸素運動',
+                            data: aerobicData,
+                            borderColor: 'blue',
+                            fill: false
+                        },
+                        {
+                            label: '無酸素運動',
+                            data: anoxicData,
+                            borderColor: 'red',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 @endsection
