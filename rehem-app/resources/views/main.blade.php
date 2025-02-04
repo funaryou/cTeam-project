@@ -33,85 +33,102 @@
     </section>
     <section class="post">
         <article class="postForm">
-            <div class="postFormItem">
-                <div class="wrapper">
-                    <div class="userIcon"></div>
-                    <input class="postInput" type="text" placeholder="いま何してる？">
+            <form method="POST" action="{{ route('rehem.post_store') }}">
+                @csrf
+                <div class="postFormItem">
+                    <div class="wrapper">
+                        <div class="userIcon"></div>
+                        <input class="postInput" type="text" name="content" value="{{ old('content') }}" placeholder="今何してる？">
+                    </div>
+                    <button class="commonButton" type="submit">投稿する</button>
                 </div>
-                <button class="commonButton" type="submit">投稿する</button>
-            </div>
+            </form>
         </article>
         <article class="postFeed">
+            @foreach ($posts as $post)
             <ul>
                 <li class="postCard">
                     <div class="wrapper">
                         <div class="userIcon"></div>
                         <div class="likeIndicator">
-                            <p class="likeCount">270</p>
-                            <button class="likeButton"></button>
+                            <p class="likeCount">{{ $post["likes"] }}</p>
                         </div>
                     </div>
-                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
+                    <p class="postContent">{{ $post["content"] }}</p>
                     <div class="divider"></div>
                 </li>
-                <!-- for文で繰り返し -->
-                <li class="postCard">
-                    <div class="wrapper">
-                        <div class="userIcon"></div>
-                        <div class="likeIndicator">
-                            <p class="likeCount">270</p>
-                            <button class="likeButton"></button>
-                        </div>
-                    </div>
-                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
-                    <div class="divider"></div>
-                </li>
-                <li class="postCard">
-                    <div class="wrapper">
-                        <div class="userIcon"></div>
-                        <div class="likeIndicator">
-                            <p class="likeCount">270</p>
-                            <button class="likeButton"></button>
-                        </div>
-                    </div>
-                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
-                    <div class="divider"></div>
-                </li>
-                <li class="postCard">
-                    <div class="wrapper">
-                        <div class="userIcon"></div>
-                        <div class="likeIndicator">
-                            <p class="likeCount">270</p>
-                            <button class="likeButton"></button>
-                        </div>
-                    </div>
-                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
-                    <div class="divider"></div>
-                </li>
-                <li class="postCard">
-                    <div class="wrapper">
-                        <div class="userIcon"></div>
-                        <div class="likeIndicator">
-                            <p class="likeCount">270</p>
-                            <button class="likeButton"></button>
-                        </div>
-                    </div>
-                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
-                    <div class="divider"></div>
-                </li>
-                <li class="postCard">
-                    <div class="wrapper">
-                        <div class="userIcon"></div>
-                        <div class="likeIndicator">
-                            <p class="likeCount">270</p>
-                            <button class="likeButton"></button>
-                        </div>
-                    </div>
-                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
-                    <div class="divider"></div>
-                </li>
-                <!-- for文で繰り返し -->
             </ul>
+            @endforeach
+            {{-- <ul>
+                <li class="postCard">
+                    <div class="wrapper">
+                        <div class="userIcon"></div>
+                        <div class="likeIndicator">
+                            <p class="likeCount">270</p>
+                            <button class="likeButton"></button>
+                        </div>
+                    </div>
+                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
+                    <div class="divider"></div>
+                </li>
+                <!-- for文で繰り返し -->
+                <li class="postCard">
+                    <div class="wrapper">
+                        <div class="userIcon"></div>
+                        <div class="likeIndicator">
+                            <p class="likeCount">270</p>
+                            <button class="likeButton"></button>
+                        </div>
+                    </div>
+                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
+                    <div class="divider"></div>
+                </li>
+                <li class="postCard">
+                    <div class="wrapper">
+                        <div class="userIcon"></div>
+                        <div class="likeIndicator">
+                            <p class="likeCount">270</p>
+                            <button class="likeButton"></button>
+                        </div>
+                    </div>
+                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
+                    <div class="divider"></div>
+                </li>
+                <li class="postCard">
+                    <div class="wrapper">
+                        <div class="userIcon"></div>
+                        <div class="likeIndicator">
+                            <p class="likeCount">270</p>
+                            <button class="likeButton"></button>
+                        </div>
+                    </div>
+                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
+                    <div class="divider"></div>
+                </li>
+                <li class="postCard">
+                    <div class="wrapper">
+                        <div class="userIcon"></div>
+                        <div class="likeIndicator">
+                            <p class="likeCount">270</p>
+                            <button class="likeButton"></button>
+                        </div>
+                    </div>
+                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
+                    <div class="divider"></div>
+                </li>
+                <li class="postCard">
+                    <div class="wrapper">
+                        <div class="userIcon"></div>
+                        <div class="likeIndicator">
+                            <p class="likeCount">270</p>
+                            <button class="likeButton"></button>
+                        </div>
+                    </div>
+                    <p class="postContent">テキストテキストテキストテキストテキストテキスト</p>
+                    <div class="divider"></div>
+                </li>
+                <!-- for文で繰り返し -->
+            </ul> --}}
         </article>
         <article class="switchFollow">
             <button class="switchToAllButton active">全て</button>
