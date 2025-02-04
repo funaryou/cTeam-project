@@ -9,7 +9,7 @@
             <div class="wrapper">
                 <div class="todayTotal">
                     <p class="title">今日</p>
-                    {{-- <p class="count">{{ $account->user_name }}</p>ß --}}
+                    <p class="count">20時間</p>
                 </div>
                 <div class="weeklyTotal">
                     <p class="title">今週</p>
@@ -18,8 +18,14 @@
             </div>
             <div class="wrapper">
                 <div class="oxygenPacentage">
-                    <p class="aerobic">有酸素 20%</p>
-                    <p class="anoxic">無酸素 80%</p>
+                    <div class="wrapper">
+                        <div class="aerobicIcon icon"></div>
+                        <p class="aerobic">有酸素 20%</p>
+                    </div>
+                    <div class="wrapper">
+                        <div class="anoxicIcon icon"></div>
+                        <p class="anoxic">無酸素 80%</p>
+                    </div>
                 </div>
                 <a href="{{ route('record') }}" class="commonXLButton">筋トレした！</a>
             </div>

@@ -21,6 +21,7 @@
     --color-convert-backgroundColor: invert(100%) sepia(20%) saturate(5627%) hue-rotate(184deg) brightness(110%) contrast(98%);
     --color-convert-mainColor: invert(66%) sepia(24%) saturate(767%) hue-rotate(144deg) brightness(97%) contrast(103%);
     --color-convert-subColor: invert(17%) sepia(96%) saturate(1024%) hue-rotate(189deg) brightness(94%) contrast(95%);
+    --color-convert-accentColor: invert(64%) sepia(77%) saturate(2111%) hue-rotate(3deg) brightness(102%) contrast(91%);
 }
 
 body{
@@ -63,25 +64,31 @@ header.sidebar{
 
             &.home{
                 background-image: url(../img/homeIcon.svg);
+                filter: var(--color-convert-backgroundColor);
 
                 &.active{
-                    background-image: url(../img/homeIcon-Active.svg);
+                    background-image: url(../img/homeIcon.svg);
+                    filter: var(--color-convert-subColor);
                 }
             }
 
             &.addRecord{
                 background-image: url(../img/addRecordIcon.svg);
+                filter: var(--color-convert-backgroundColor);
 
                 &.active{
-                    background-image: url(../img/addRecordIcon-Active.svg);
+                    background-image: url(../img/addRecordIcon.svg);
+                    filter: var(--color-convert-subColor);
                 }
             }
 
             &.profile{
                 background-image: url(../img/profileIcon.svg);
+                filter: var(--color-convert-backgroundColor);
 
                 &.active{
-                    background-image: url(../img/profileIcon-Active.svg);
+                    background-image: url(../img/profileIcon.svg);
+                    filter: var(--color-convert-subColor);
                 }
             }
 
@@ -225,17 +232,40 @@ section.record{
 
             & .oxygenPacentage{
 
-                & p{
-                    font-weight: var(--boldFont);
-                    font-size: 30px;
-                    margin: 12px 0;
+                & .wrapper{
+                    display: flex;
+                    gap: 12px;
+                    align-items: center;
 
-                    &.aerobic{
-                        color: var(--mainColor);
+                    & .icon{
+                        width: 48px;
+                        height: auto;
+                        aspect-ratio: 1/1;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 78%;
+        
+                        &.aerobicIcon{
+                            background-image: url(../img/aerobicIcon.svg);
+                            filter: var(--color-convert-mainColor);
+                        }
+                        &.anoxicIcon{
+                            background-image: url(../img/anoxicIcon.svg);
+                            filter: var(--color-convert-subColor);
+                        }
                     }
-
-                    &.anoxic{
-                        color: var(--subColor);
+                    & p{
+                        font-weight: var(--boldFont);
+                        font-size: 30px;
+                        margin: 12px 0;
+    
+                        &.aerobic{
+                            color: var(--mainColor);
+                        }
+    
+                        &.anoxic{
+                            color: var(--subColor);
+                        }
                     }
                 }
             }
@@ -347,6 +377,7 @@ section.post{
                             aspect-ratio: 1/1;
                             background-color: var(--dimColor);
                             background-image: url(../img/likeIcon.svg);
+                            filter: var(--color-convert-subColor);
                             background-size: 50%;
                             background-repeat: no-repeat;
                             background-position: center;
@@ -460,6 +491,24 @@ section.recordForm{
             font-weight: var(--boldFont);
             transition: all .25s;
 
+            & .icon{
+                width: 30px;
+                height: auto;
+                aspect-ratio: 1/1;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 78%;
+                margin-right: 12px;
+
+                &.aerobicIcon{
+                    background-image: url(../img/aerobicIcon.svg);
+                }
+                &.anoxicIcon{
+                    background-image: url(../img/anoxicIcon.svg);
+                }
+                filter: var(--color-convert-subColor);
+            }
+
             &:hover{
                 background-color: var(--dimColor);
                 opacity: 1;
@@ -469,6 +518,11 @@ section.recordForm{
                 background-color: var(--mainColor);
                 color: var(--backgroundColor);
                 opacity: 1;
+
+                & .icon{
+                    filter: var(--color-convert-backgroundColor);   
+                    opacity: 1;                 
+                }
             }
         }
 
