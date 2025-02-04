@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
+use App\Models\Session;
+
 
 class LoginController extends Controller
 {
@@ -72,6 +74,10 @@ class LoginController extends Controller
         
 
     // }
+    public function view_guest ()
+    {
+        return view("account.guest");
+    }
 
     public function guest()
     {
@@ -81,6 +87,8 @@ class LoginController extends Controller
         if ($user) {
             Auth::login($user);
             return redirect()->route("rehem.main");
+        } else {
+            return redirect()->route("login");
         }
     }
 }
