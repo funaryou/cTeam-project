@@ -28,7 +28,7 @@
                     <input type="password" name="password" required>
                 </p>
 
-                <button class="commonButton" type="submit">ログイン</button>
+                <button class="commonButton" type="submit" name="button" value="register">ログイン</button>
                 @if ($errors->any())
                 <div>
                     <ul>
@@ -47,7 +47,7 @@
                 <p>No user is logged in.</p>
             @endif
 
-            <a href="{{ route('logout') }}">Logout</a>
+            <a href="{{ route('register') }}">登録してない人はこちら</a>
         </section>
     </main>
 </body>

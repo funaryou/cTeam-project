@@ -5,11 +5,12 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
+Route::get('/', [AccountController::class, 'landing'])->name('landing');
 
 Route::prefix("/rehem")->group(function(){
     Route::get("/main", [AccountController::class, "top"])->name("top")->middleware('auth');

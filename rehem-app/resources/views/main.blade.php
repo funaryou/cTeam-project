@@ -45,7 +45,9 @@
                 @csrf
                 <div class="postFormItem">
                     <div class="wrapper">
-                        <div class="userIcon"></div>
+                        <div class="userIcon">
+                            <img class="userIcon" src="{{ asset('storage/' . $account->profile_pic ) }}" alt="#">
+                        </div>
                         <input class="postInput" type="text" name="content" value="{{ old('content') }}" placeholder="今何してる？" required>
                     </div>
                     <button class="commonButton" type="submit"><div class="icon post"></div><p>投稿する</p></button>
@@ -59,7 +61,9 @@
                     <li class="postCard">
                         <div class="wrapper">
                             <a href="{{ route('profile', ['id' => $post->author->id]) }}" class="user">
-                                <div class="userIcon"></div>
+                                <div class="userIcon">
+                                    <img class="userIcon" src="{{ asset('storage/' . $post->author->profile_pic ) }}" alt="#">
+                                </div>
                                 <p>{{ $post->author->user_name}}</p>
                             </a>
                             

@@ -3,7 +3,9 @@
 @section('content')
      <form action="{{route("prof_update", ["id" => $account->id])}}" class="userProfile">
         <article class="upperSection">
-            <div class="uesrIcon"></div>
+            <div class="uesrIcon">
+                <img src="{{ asset('storage/' . $account->profile_pic ) }}" alt="#">
+            </div>
             <div class="wrapper">
                 <p class="name"><input name="user_name" type="text" placeholder="{{$account->user_name}}"></p>
                 <p class="message"><input name="profile_word" placeholder="{{$account->profile_word}}"></input></p>

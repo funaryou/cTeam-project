@@ -12,6 +12,13 @@ use Carbon\Carbon;
 
 class AccountController extends Controller
 {
+
+    public function landing() 
+    {
+        return view("landing");
+    }
+
+    
     public function top()
     {
         $posts = Post::all();

@@ -4,7 +4,9 @@
     <div class="profileWrapper">
         <section class="userProfile">
             <article class="upperSection">
-                <div class="uesrIcon"></div>
+                <div class="uesrIcon">
+                    <img class="uesrIcon" src="{{ asset('storage/' . $account->profile_pic ) }}" alt="#">
+                </div>
                 <div class="wrapper">
                     <p class="name">{{ $account->user_name}}</p>
                     <p class="message">{{ $account->profile_word}}</p>
