@@ -18,7 +18,7 @@ class AccountController extends Controller
         return view("landing");
     }
 
-    
+
     public function top()
     {
         $posts = Post::all();

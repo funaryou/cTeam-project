@@ -559,7 +559,7 @@ section.post{
 
         & ul{
             display: flex;
-            flex-direction: column;
+            flex-direction: column-reverse;
             gap: 24px;
             height: 360px;
             overflow: scroll;

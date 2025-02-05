@@ -19,6 +19,7 @@ Route::prefix("/rehem")->group(function(){
     Route::get("/{id}/edit", [AccountController::class, "edit"])->name("edit")->middleware('auth');
     Route::get("/record", [AccountController::class, "record"])->name("record")->middleware('auth');
     Route::post('/post/store', [PostController::class, 'post_store'])->name('rehem.post_store')->middleware('auth');
+    // Route::post('/post/likes', [PostController::class, 'likes'])->name('rehem.post_likes')->middleware('auth');
     Route::get("/record", [AccountController::class, "record"])->name("record")->middleware('auth');
     Route::post("/day_record", [AccountController::class, "day_record"])->name("day_record")->middleware('auth');
     Route::post('/recode', [RecodeGetController::class, 'recode_get'])->name('recode_get')->middleware('auth');

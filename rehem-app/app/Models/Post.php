@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ["id", "content", "author_id"]; // liked_byを削除
+    protected $fillable = ["id", "content", "author_id","random_num"]; // liked_byを削除
 
     public function author()
     {

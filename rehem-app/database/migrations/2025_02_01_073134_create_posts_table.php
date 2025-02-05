@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id("id");
             $table->text("content");
+            $table->integer("random_num");
             $table->timestamps();
         });
     }

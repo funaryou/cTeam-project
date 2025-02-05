@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Account;
@@ -26,9 +28,21 @@ class PostController extends Controller
             "author_id" => $user->id,
             "created_at" => now(),
             "updated_at" => now(),
+            "random_num" => rand(1, 100000),
         ]);
+        
         return redirect('/rehem/main');
     }
+
+    // public function likes(Request $request,$id)
+    // {
+    //     $user = Auth::user();
+    //     $PostID = Task::find($id);
+
+    //     $PostID->update([
+    //         "account_id" => ,
+    //     ]);
+    // }
 
 
 }

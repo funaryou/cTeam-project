@@ -66,9 +66,9 @@
                                 </div>
                                 <p>{{ $post->author->user_name}}</p>
                             </a>
-                            
                             <div class="likeIndicator">
-                                <p class="likeCount">{{ $post["likes"] }}</p>
+                                <p class="likeCount">{{ $post->random_num}}</p>
+                                <button class="likeButton"></button>
                             </div>
                         </div>
                         <p class="postContent">{{ $post["content"] }}</p>
