@@ -347,97 +347,143 @@ section.record{
         border-radius: calc(var(--mainBorderRadius) / 2);
     }
 
-    & .indicator{
-        flex: 1;
+    & .wrapper{
         display: flex;
-        flex-direction: column;
         justify-content: center;
-        gap: 30px;
-        & .wrapper{
+        gap: 24px;
+
+        & .recordCard{
             display: flex;
-            gap: 24px;
-            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30%;
+            background-color: var(--mainColor);
+            border-radius: calc(var(--mainBorderRadius) / 2);
+            padding: 30px;
+            background-image: url(../img/recordCardBackGround.svg);
+            background-size: cover;
+            backdrop-filter: blur(12px);
 
-            & .title{
+            & h2{
+                font-weight: var(--boldFont);
+                font-size: 30px;
+                color: var(--backgroundColor);
+            }
+
+            & .description{
+                font-size: 18px;
+                color: var(--backgroundColor);
+            }
+
+            & .commonXLButton{
+                background-color: var(--backgroundColor);
                 color: var(--subColor);
-                font-weight: var(--boldFont);
-                font-size: 24px;
-            }
+                padding: 12px 0;
+                width: 100%;
 
-            & .todayTotal, .weeklyTotal{
-                padding: 24px;
-                border: solid 1px var(--dimColor);
-                border-radius: calc(var(--mainBorderRadius) / 2);
+                & .icon{
+                    filter: var(--color-convert-subColor);
+                }
             }
+        }
 
-            & .weeklyTotal .count{
-                color: var(--greenColor);
-            }
+        & .indicator{
+            width: 60%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 30px;
 
-            & .count{
-                color: var(--accentColor);
-                font-weight: var(--boldFont);
-                font-size: 48px;
-            }
-
-            & .oxygenPacentage{
+            & .wrapper{
                 display: flex;
-                flex-direction: row;
                 gap: 24px;
+                align-items: center;
 
-                & .wrapper{
-                    display: flex;
+                & .title{
+                    color: var(--subColor);
+                    font-weight: var(--boldFont);
+                    font-size: 24px;
+                }
+
+                & .todayTotal, .weeklyTotal{
                     padding: 24px;
-                    gap: 12px;
-                    align-items: center;
                     border: solid 1px var(--dimColor);
                     border-radius: calc(var(--mainBorderRadius) / 2);
-                    
+                    width: 50%;
+                }
 
-                    & .icon{
-                        width: 60px;
-                        height: auto;
-                        aspect-ratio: 1/1;
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        background-size: 100%;
-        
-                        &.aerobicIcon{
-                            background-image: url(../img/aerobicIcon.svg);
-                            filter: var(--color-convert-mainColor);
-                        }
-                        &.anoxicIcon{
-                            background-image: url(../img/anoxicIcon.svg);
-                            filter: var(--color-convert-subColor);
-                        }
-                    }
-                    .textWrapper{
+                & .weeklyTotal .count{
+                    color: var(--greenColor);
+                }
+
+                & .count{
+                    color: var(--accentColor);
+                    font-weight: var(--boldFont);
+                    font-size: 48px;
+                }
+
+                & .oxygenPacentage{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 24px;
+
+                    & .wrapper{
                         display: flex;
-                        flex-direction: column;
-                        gap: 0px;
+                        padding: 24px;
+                        gap: 12px;
+                        align-items: center;
+                        border: solid 1px var(--dimColor);
+                        border-radius: calc(var(--mainBorderRadius) / 2);
+                        width: 50%;
+                        
 
-                        &.aerobic{
-                            color: var(--mainColor);
+                        & .icon{
+                            width: 60px;
+                            height: auto;
+                            aspect-ratio: 1/1;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            background-size: 100%;
+            
+                            &.aerobicIcon{
+                                background-image: url(../img/aerobicIcon.svg);
+                                filter: var(--color-convert-mainColor);
+                            }
+                            &.anoxicIcon{
+                                background-image: url(../img/anoxicIcon.svg);
+                                filter: var(--color-convert-subColor);
+                            }
                         }
-    
-                        &.anoxic{
-                            color: var(--subColor);
-                        }
+                        .textWrapper{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0px;
 
-                        & h2{
-                            font-weight: var(--boldFont);
-                            font-size: 60px;
-                            line-height: 0.8;
-                        }
+                            &.aerobic{
+                                color: var(--mainColor);
+                            }
+        
+                            &.anoxic{
+                                color: var(--subColor);
+                            }
 
-                        & p{
-                            font-weight: var(--boldFont);
-                            font-size: 24px;
-                            opacity: .6;
-                            
+                            & h2{
+                                font-weight: var(--boldFont);
+                                font-size: 60px;
+                                line-height: 0.8;
+                            }
+
+                            & p{
+                                font-weight: var(--boldFont);
+                                font-size: 24px;
+                                opacity: .6;
+                                
+                            }
                         }
+                        
                     }
-                    
                 }
             }
         }

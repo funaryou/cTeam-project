@@ -5,28 +5,36 @@
         <div class="graph">
             <canvas id="activityChart"></canvas>
         </div>
-        <div class="indicator">
-            <div class="wrapper">
-                <div class="todayTotal">
-                    <p class="title">今日</p>
-                    <p class="count">@formatTime($total_sum)</p>
+        <div class="wrapper">
+            <div class="indicator">
+                <div class="wrapper">
+                    <div class="todayTotal">
+                        <p class="title">今日</p>
+                        <p class="count">@formatTime($total_sum)</p>
+                    </div>
+                    <div class="weeklyTotal">
+                        <p class="title">今週</p>
+                        <p class="count">@formatTime($weeklyTotals->total)</p>
+                    </div>
                 </div>
-                <div class="weeklyTotal">
-                    <p class="title">今週</p>
-                    <p class="count">@formatTime($weeklyTotals->total)</p>
+                <div class="wrapper">
+                    <div class="oxygenPacentage">
+                        <div class="wrapper">
+                            <div class="aerobicIcon icon"></div>
+                            <div class="aerobic textWrapper"><h2>{{$aerobicPercent}}%</h2><p>有酸素</p></div>
+                        </div>
+                        <div class="wrapper">
+                            <div class="anoxicIcon icon"></div>
+                            <div class="anoxic textWrapper"><h2>{{$anoxicPercent}}%</h2><p>無酸素</p></div>
+                        </div>
+                    </div>
+                    
                 </div>
+                
             </div>
-            <div class="wrapper">
-                <div class="oxygenPacentage">
-                    <div class="wrapper">
-                        <div class="aerobicIcon icon"></div>
-                        <div class="aerobic textWrapper"><h2>{{$aerobicPercent}}%</h2><p>有酸素</p></div>
-                    </div>
-                    <div class="wrapper">
-                        <div class="anoxicIcon icon"></div>
-                        <div class="anoxic textWrapper"><h2>{{$anoxicPercent}}%</h2><p>無酸素</p></div>
-                    </div>
-                </div>
+            <div class="recordCard">
+                <h2>記録しよう！</h2>
+                <p class="description">運動した時間を記録することで日々のモチベーションをアップしよう</p>
                 <a href="{{ route('record') }}" class="commonXLButton"><div class="icon record"></div><p>筋トレした！</p></a>
             </div>
         </div>
