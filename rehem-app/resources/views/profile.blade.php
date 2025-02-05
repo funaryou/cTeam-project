@@ -28,7 +28,7 @@
                     <h2 class="title">プロフィール</h2>
                     <table>
                         <tr>
-                            <th>生年月日</th><td>{{ $account->age }} 歳</td>
+                            <th>年齢</th><td>{{ $account->age }} 歳</td>
                         </tr>
                         <tr>
                             <th>身長</th><td>{{$account->stature}}cm</td>

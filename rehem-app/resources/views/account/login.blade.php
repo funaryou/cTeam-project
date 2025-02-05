@@ -40,12 +40,12 @@
                 @endif
             </form>
             
-            @if ($user)
+            {{-- @if ($user)
                 <p>User Name: {{ $user->user_name }}</p>
                 <!-- 他のユーザー情報も表示できます -->
             @else
                 <p>No user is logged in.</p>
-            @endif
+            @endif --}}
 
             <a href="{{ route('register') }}">登録してない人はこちら</a>
         </section>
