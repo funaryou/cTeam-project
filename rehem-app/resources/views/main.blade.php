@@ -249,3 +249,8 @@
         });
     </script>
 @endsection
+
+@section('scripts')
+    {{-- Chart.js をローカルから読み込む --}}
+    <script type="module" src="{{ asset('js/chart.min.js') }}"></script>
+@endsection
