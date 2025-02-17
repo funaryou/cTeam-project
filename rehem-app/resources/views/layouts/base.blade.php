@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
     {{-- fonts --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">     --}}
+    <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
     {{-- java script --}}
     <script src="{{ asset('js/script.js') }}"></script>
+    {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    {{-- <script type="module" src="{{ asset('js/chart.min.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -20,4 +24,7 @@
     <main>
         @yield('content')
     </main>
+    @stack('scripts')
+
+
 </body>

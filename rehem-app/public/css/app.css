@@ -399,6 +399,7 @@ section.record{
                 display: flex;
                 gap: 24px;
                 align-items: center;
+                justify-content: center;
 
                 & .title{
                     color: var(--subColor);
@@ -407,7 +408,11 @@ section.record{
                 }
 
                 & .todayTotal, .weeklyTotal{
-                    padding: 24px;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 24px 12px;
                     border: solid 1px var(--dimColor);
                     border-radius: calc(var(--mainBorderRadius) / 2);
                     width: 50%;
